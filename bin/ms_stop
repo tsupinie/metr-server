@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import subprocess
+import os
+import signal
+
+ps_out = subprocess.check_output(['ps']).decode('utf-8')
+for line in ps_out.split("\n"):
+    if 'metr_stream/server.py' in line:
+        pid = int(line[:5].strip())
+        break
+
+os.kill(pid, signal.SIGTERM)

@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+
+import subprocess
+from datetime import datetime
+
+
+ps_out = subprocess.check_output(['ps']).decode('utf-8')
+running = False
+for line in ps_out.split("\n"):
+    if 'metr_stream/server.py' in line:
+        running = True
+        break
+
+if not running:
+    now = datetime.utcnow()
+    log_name = f"ms.{now.strftime('%Y%m%d.%H%M')}.log"
+
+    subprocess.Popen(['python', 'metr_stream/server.py'], 
+                     stdout=open(log_name, 'wb'), 
+                     stderr=subprocess.STDOUT)
+else:
+    print("It looks like the server is already running")
