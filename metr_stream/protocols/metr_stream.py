@@ -22,10 +22,14 @@ class MetrStreamProtocol(WebSocketServerProtocol):
         msg_json = json.loads(payload)
 
         req_type = msg_json.pop('type')
-        req_data = get_data_handler(req_type)(**req)
+        req_handler = get_data_handler(req_type)(**msg_json)
+        req_data = req_handler.fetch()
 
-        data_json = json.dumps(req_data)
+        data_json = json.dumps(req_data).encode('utf-8')
+        self._logger.info(f"Sending {len(data_json)} bytes to {self._source}")
         self.sendMessage(data_json, is_binary)
+
+        req_handler.post_fetch()
 
     def onClose(self, was_clean, code, reason):
         if was_clean:

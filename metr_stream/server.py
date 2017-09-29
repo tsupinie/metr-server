@@ -1,6 +1,7 @@
 
 import logging
 import asyncio
+import signal
 
 from autobahn.asyncio.websocket import WebSocketServerFactory
 
