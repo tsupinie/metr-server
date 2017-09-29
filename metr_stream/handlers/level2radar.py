@@ -78,23 +78,35 @@ class Level2Handler(DataHandler):
         self._site = site
         self._field = field
         self._elev = elev
-        self._radar_vol = None
+        self._radar_vols = []
 
     def fetch(self):
         dts = check_recent_site(self._site)
-        fetch_dt = max(dts)
+        dts.sort()
 
-        sweep = self._load_cache(self._site, self._field, self._elev, fetch_dt)
-        if sweep is None:
-            self._radar_vol = RadarVolume.fetch(self._site, fetch_dt)
-            sweep_obj = self._radar_vol.get_sweep(self._field, self._elev)
-            sweep = sweep_obj.to_json()
+        sweep = None
+        idt = 0
+
+        while sweep is None:
+            fetch_dt = dts[idt]
+            sweep = self._load_cache(self._site, self._field, self._elev, fetch_dt)
+            if sweep is None:
+                rv = RadarVolume.fetch(self._site, fetch_dt)
+                sweep_obj = rv.get_sweep(self._field, self._elev)
+
+                self._radar_vols.append(rv)
+                try:
+                    sweep = sweep_obj.to_json()
+                except AttributeError:
+                    sweep = None
+
+            idt += 1
 
         return sweep
        
     def post_fetch(self):
-        if self._radar_vol is not None:
-            self._radar_vol.cache(cache_dir=Level2Handler._cache_dir)
+        for rv in self._radar_vols:
+            rv.cache(cache_dir=Level2Handler._cache_dir)
 
     def _load_cache(self, site, field, elev, dt):
         cache_name = _cache_fname(Level2Handler._cache_dir, site, field, elev, dt)
