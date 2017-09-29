@@ -4,12 +4,15 @@ import json
 
 from autobahn.asyncio.websocket import WebSocketServerProtocol
 
+from metr_stream.handlers.handler import get_data_handler
+
 
 class MetrStreamProtocol(WebSocketServerProtocol):
     def __init__(self, *args, **kwargs):
         super(MetrStreamProtocol, self).__init__(*args, **kwargs)
 
         self._logger = logging.getLogger(__name__)
+        self._logger.setLevel(logging.INFO)
 
     def onConnect(self, request):
         self._source = request.peer
@@ -19,7 +22,7 @@ class MetrStreamProtocol(WebSocketServerProtocol):
         msg_json = json.loads(payload)
 
         req_type = msg_json.pop('type')
-        req_data = req_handlers[req_type](**req)
+        req_data = get_data_handler(req_type)(**req)
 
         data_json = json.dumps(req_data)
         self.sendMessage(data_json, is_binary)

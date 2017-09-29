@@ -5,6 +5,7 @@ import asyncio
 from autobahn.asyncio.websocket import WebSocketServerFactory
 
 from protocols.hollaback import HollaBackProtocol
+from protocols.metr_stream import MetrStreamProtocol
 
 
 def main():
@@ -14,7 +15,7 @@ def main():
     logger.setLevel(logging.INFO)
 
     factory = WebSocketServerFactory()
-    factory.protocol = HollaBackProtocol
+    factory.protocol = MetrStreamProtocol
 
     loop = asyncio.get_event_loop()
     coro = loop.create_server(factory, '127.0.0.1', port)

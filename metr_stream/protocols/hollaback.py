@@ -9,6 +9,7 @@ class HollaBackProtocol(WebSocketServerProtocol):
         super(HollaBackProtocol, self).__init__(*args, **kwargs)
 
         self._logger = logging.getLogger(__name__)
+        self._logger.setLevel(logging.INFO)
 
     def onConnect(self, request):
         self._logger.info(f"Connection from {request.peer} accepted")
