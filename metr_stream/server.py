@@ -20,12 +20,19 @@ def main():
     coro = loop.create_server(factory, '127.0.0.1', port)
     server = loop.run_until_complete(coro)
 
+    def staaahp(sig_num, stack_frame):
+        raise KeyboardInterrupt()
+
+    signal.signal(signal.SIGINT, staaahp)
+
     try:
         logger.info(f"Listening on port {port}")
         loop.run_forever()
     except KeyboardInterrupt:
         print()
     finally:
+        logger.info("Shutting down")
+
         server.close()
         loop.close()
 

@@ -10,4 +10,4 @@ for line in ps_out.split("\n"):
         pid = int(line[:5].strip())
         break
 
-os.kill(pid, signal.SIGTERM)
+os.kill(pid, signal.SIGINT)
