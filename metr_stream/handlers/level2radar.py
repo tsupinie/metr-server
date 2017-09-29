@@ -87,7 +87,8 @@ class Level2Handler(DataHandler):
         sweep = self._load_cache(self._site, self._field, self._elev, fetch_dt)
         if sweep is None:
             self._radar_vol = RadarVolume.fetch(self._site, fetch_dt)
-            sweep = self._radar_vol.get_sweep(self._field, self._elev)
+            sweep_obj = self._radar_vol.get_sweep(self._field, self._elev)
+            sweep = sweep_obj.to_json()
 
         return sweep
        
@@ -113,7 +114,9 @@ class RadarVolume(object):
     def get_sweep(self, field, elev):
         sweep = None
         for swp in self._sweeps:
-            if field == swp.field and elev == swp.elev:
+            swp_field = RadarSweep._cache_fields[swp.field]
+            swp_elev = round(swp.elevation, 1)
+            if field == swp_field and elev == swp_elev:
                 sweep = swp
         return sweep
 
