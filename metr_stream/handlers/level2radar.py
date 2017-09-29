@@ -67,7 +67,7 @@ def check_recent_site(site):
 
 
 def _cache_fname(cache_dir, site, field, elev, dt):
-    fname = f"{cache_dir}/{site}_{field}_{elev:4.1f}_{dt.strftime('%Y%m%d_%H%M')}"
+    fname = f"{cache_dir}/{site}_{field}_{elev:04.1f}_{dt.strftime('%Y%m%d_%H%M')}.json"
     return fname
 
 
