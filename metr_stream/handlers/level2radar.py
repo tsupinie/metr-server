@@ -80,9 +80,9 @@ class Level2Handler(DataHandler):
         self._elev = elev
         self._radar_vols = []
 
-    def fetch(self):
+    async def fetch(self):
         dts = check_recent_site(self._site)
-        dts.sort()
+        dts.sort(reverse=True)
 
         sweep = None
         idt = 0
@@ -91,7 +91,7 @@ class Level2Handler(DataHandler):
             fetch_dt = dts[idt]
             sweep = self._load_cache(self._site, self._field, self._elev, fetch_dt)
             if sweep is None:
-                rv = RadarVolume.fetch(self._site, fetch_dt)
+                rv = await RadarVolume.fetch(self._site, fetch_dt)
                 sweep_obj = rv.get_sweep(self._field, self._elev)
 
                 self._radar_vols.append(rv)
@@ -102,6 +102,9 @@ class Level2Handler(DataHandler):
 
             idt += 1
 
+        int_deg = int(np.floor(self._elev))
+        frc_deg = int((self._elev - int_deg) * 10)
+        sweep['handler'] = f"level2radar.{self._site}.{self._field}.{int_deg:02d}p{frc_deg:1d}"
         return sweep
        
     def post_fetch(self):
@@ -137,7 +140,7 @@ class RadarVolume(object):
             swp.cache(cache_dir=cache_dir)
 
     @classmethod
-    def fetch(cls, site, dt, local=False):
+    async def fetch(cls, site, dt, local=False):
         if local:
             url = f"http://127.0.0.1:8000/data/l2raw/{site}{dt.strftime('%Y%m%d_%H%M')}_V06"
         else:

@@ -10,7 +10,7 @@ def get_data_handler(name):
 
 
 class DataHandler(object):
-    def fetch(self):
+    async def fetch(self):
         raise NotImplementedError(f"fetch() is not implemented for {self.__class__.__name___}")
 
     def post_fetch(self):

@@ -1,6 +1,7 @@
 
 import logging
 import json
+import multiprocessing
 
 from autobahn.asyncio.websocket import WebSocketServerProtocol
 
@@ -18,18 +19,22 @@ class MetrStreamProtocol(WebSocketServerProtocol):
         self._source = request.peer
         self._logger.info(f"Connection from {self._source} opened")
 
-    def onMessage(self, payload, is_binary):
+    async def onMessage(self, payload, is_binary):
         msg_json = json.loads(payload)
 
         req_type = msg_json.pop('type')
         req_handler = get_data_handler(req_type)(**msg_json)
-        req_data = req_handler.fetch()
+        req_data = await req_handler.fetch()
 
         data_json = json.dumps(req_data).encode('utf-8')
-        self._logger.info(f"Sending {len(data_json)} bytes to {self._source}")
         self.sendMessage(data_json, is_binary)
 
-        req_handler.post_fetch()
+        proc = multiprocessing.Process(target=req_handler.post_fetch)
+        proc.start()
+
+    def sendMessage(self, payload, is_binary):
+        self._logger.info(f"Sending {len(payload)} bytes to {self._source}")
+        super(MetrStreamProtocol, self).sendMessage(payload, is_binary)
 
     def onClose(self, was_clean, code, reason):
         if was_clean:
