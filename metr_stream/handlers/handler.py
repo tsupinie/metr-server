@@ -1,9 +1,11 @@
 
 def get_data_handler(name):
     from .level2radar import Level2Handler
+    from .shapefile import ShapefileHandler
 
     handler_dict = {
         'level2radar': Level2Handler,
+        'shapefile': ShapefileHandler,
     }
 
     return handler_dict[name]
