@@ -93,12 +93,18 @@ class Level2Handler(DataHandler):
             if sweep is None:
                 rv = await RadarVolume.fetch(self._site, fetch_dt)
                 sweep_obj = rv.get_sweep(self._field, self._elev)
-
                 self._radar_vols.append(rv)
+
                 try:
                     sweep = sweep_obj.to_json()
                 except AttributeError:
+                    _logger.info("Rejecting volume: sweep not present")
                     sweep = None
+                else:
+                    if not sweep_obj.is_complete():
+                        dazim = round(sweep_obj._dazim, 1)
+                        _logger.info(f"Rejecting volume: sweep incomplete (dazim = {dazim}, n_rays = {sweep_obj._data.shape[0]})")
+                        sweep_obj = None
 
             idt += 1
 
@@ -137,7 +143,8 @@ class RadarVolume(object):
 
     def cache(self, cache_dir='.'):
         for swp in self._sweeps:
-            swp.cache(cache_dir=cache_dir)
+            if swp.is_complete():
+                swp.cache(cache_dir=cache_dir)
 
     @classmethod
     async def fetch(cls, site, dt, local=False):
@@ -162,8 +169,13 @@ class RadarVolume(object):
                 azimuths = rfile.get_azimuth(ie)
                 ranges = rfile.range['data']
 
+                saz = azimuths[0]
+                eaz = azimuths[-1] if azimuths[-1] > azimuths[0] else azimuths[-1] + 360
+                dazim = round((eaz - saz) / len(azimuths), 1)
+
                 dt_sweep = dt + timedelta(seconds=rfile.time['data'][istart])
-                rs = RadarSweep(site, dt_sweep, field, elv, azimuths[0], float(ranges[0]), rfile.get_field(ie, field))
+                rs = RadarSweep(site, dt_sweep, field, elv, 
+                                azimuths[0], float(ranges[0]), dazim, 250, rfile.get_field(ie, field))
                 sweeps.append(rs)
         return cls(sweeps)
 
@@ -172,8 +184,7 @@ class RadarSweep(object):
     _cache_fields = {'reflectivity': 'REF', 'velocity': 'VEL', 'spectrum_width': 'SPW', 
                      'cross_correlation_ratio': 'CCR', 'differential_phase': 'KDP', 'differential_reflectivity': 'ZDR'}
 
-    def __init__(self, site, dt, field, elevation, start_azimuth, start_range, data):
-        dazim = 0.5 if data.shape[0] == 720 else 1.
+    def __init__(self, site, dt, field, elevation, start_azimuth, start_range, dazim, drng, data):
         ctr_azim = dazim / 2
 
         self.site = site
@@ -182,7 +193,13 @@ class RadarSweep(object):
         self.elevation = elevation
         self._st_az = round((start_azimuth - ctr_azim) / dazim) * dazim + ctr_azim
         self._st_rn = start_range
+        self._dazim = dazim
+        self._drng = drng
         self._data = data
+
+    def is_complete(self):
+        n_rays = self._data.shape[0]
+        return (self._dazim == 0.5 and n_rays == 720) or (self._dazim == 1.0 and n_rays == 360)
 
     def to_json(self):
         data_filled = list(np.ma.filled(self._data, -99.).ravel())
@@ -198,7 +215,8 @@ class RadarSweep(object):
         first_x = site_x + self._st_rn * np.sin(np.radians(self._st_az))
         first_y = site_y + self._st_rn * np.cos(np.radians(self._st_az))
 
-        rs_json = {'site': self.site, 'field': self.field, 'elevation': "%f" % self.elevation, 'st_azimuth': self._st_az, 'st_range': self._st_rn}
+        rs_json = {'site': self.site, 'field': self.field.title(), 'elevation': "%f" % self.elevation, 
+                   'st_azimuth': self._st_az, 'st_range': self._st_rn, 'dazim':self._dazim, 'drng':self._drng}
         rs_json['site_latitude'] = site['latitude']
         rs_json['site_longitude'] = site['longitude']
         rs_json['first_longitude'], rs_json['first_latitude'] = proj(first_x, first_y, inverse=True)
