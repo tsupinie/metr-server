@@ -2,6 +2,9 @@
 import numpy as np
 
 import os
+import logging
+_logger = logging.getLogger(__name__)
+_logger.setLevel(logging.INFO)
 
 # Get PyART to shut up when you import it
 os.environ['PYART_QUIET'] = "1"
@@ -10,7 +13,6 @@ from pyart.io import read_nexrad_archive
 import pyproj
 
 from io import BytesIO
-import urllib.request as urlreq
 from datetime import datetime, timedelta
 import pytz
 import json
@@ -20,6 +22,7 @@ import struct
 import re
 
 from metr_stream.handlers.handler import DataHandler
+from metr_stream.utils.download import download
 
 
 _url_base = "http://mesonet-nexrad.agron.iastate.edu/level2/raw"
@@ -35,14 +38,13 @@ def radar_info():
     return _wsr_88ds
 
 
-def check_recent():
+async def check_recent():
     def parse_dt(dt_str):
         return datetime.strptime(dt_str, "%Y-%m-%d %H:%M").replace(tzinfo=_remote_tz).astimezone(pytz.utc).replace(tzinfo=None)
 
     radar_ids = [ st['id'] for st in radar_info() ]
 
-    frem = urlreq.urlopen(_url_base)
-    html = frem.read().decode('utf-8')
+    html = (await download(_url_base)).decode('utf-8')
 
     rem_sites = re.findall("href=\"([\w\d]{4})/\".*?([\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2})", html)
     rem_sites = [ (site, parse_dt(dt)) for site, dt in rem_sites if site in radar_ids ]
@@ -51,7 +53,7 @@ def check_recent():
     return rem_recent
 
 
-def check_recent_site(site):
+async def check_recent_site(site):
     def get_recent_dt(line):
         if line == "":
             return None
@@ -60,9 +62,9 @@ def check_recent_site(site):
         return dt if dt >= datetime.utcnow() - _recent_td else None
 
     url = f"{_url_base}/{site}/dir.list"
-    frem = urlreq.urlopen(url)
+    txt = await download(url)
 
-    recent = [ get_recent_dt(line) for line in frem.read().decode('utf-8').split("\n") ]
+    recent = [ get_recent_dt(line) for line in txt.decode('utf-8').split("\n") ]
     return [ dt for dt in recent if dt is not None ]    
 
 
@@ -81,7 +83,7 @@ class Level2Handler(DataHandler):
         self._radar_vols = []
 
     async def fetch(self):
-        dts = check_recent_site(self._site)
+        dts = await check_recent_site(self._site)
         dts.sort(reverse=True)
 
         sweep = None
@@ -153,10 +155,8 @@ class RadarVolume(object):
         else:
             url = f"{_url_base}/{site}/{site}_{dt.strftime('%Y%m%d_%H%M')}"
 
-        frem = urlreq.urlopen(url)
-
         bio = BytesIO()
-        bio.write(frem.read())
+        bio.write(await download(url))
         bio.seek(0)
 
         rfile = read_nexrad_archive(bio)
