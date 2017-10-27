@@ -1,0 +1,848 @@
+{
+    "ACME": {
+        "ELEV": "397",
+        "LAT": "34.808330",
+        "LON": "-98.023250",
+        "NAME": "Acme"
+    },
+    "ADAX": {
+        "ELEV": "295",
+        "LAT": "34.798510",
+        "LON": "-96.669090",
+        "NAME": "Ada"
+    },
+    "ALTU": {
+        "ELEV": "416",
+        "LAT": "34.587220",
+        "LON": "-99.338080",
+        "NAME": "Altus"
+    },
+    "ALV2": {
+        "ELEV": "439",
+        "LAT": "36.708230",
+        "LON": "-98.709740",
+        "NAME": "Alva"
+    },
+    "ALVA": {
+        "ELEV": "450",
+        "LAT": "36.779700",
+        "LON": "-98.671700",
+        "NAME": "Alva"
+    },
+    "ANT2": {
+        "ELEV": "172",
+        "LAT": "34.249670",
+        "LON": "-95.668440",
+        "NAME": "Antlers"
+    },
+    "ANTL": {
+        "ELEV": "179",
+        "LAT": "34.224380",
+        "LON": "-95.700590",
+        "NAME": "Antlers"
+    },
+    "APAC": {
+        "ELEV": "440",
+        "LAT": "34.914180",
+        "LON": "-98.292160",
+        "NAME": "Apache"
+    },
+    "ARD2": {
+        "ELEV": "266",
+        "LAT": "34.192580",
+        "LON": "-97.085680",
+        "NAME": "Ardmore"
+    },
+    "ARDM": {
+        "ELEV": "266",
+        "LAT": "34.192200",
+        "LON": "-97.085000",
+        "NAME": "Ardmore"
+    },
+    "ARNE": {
+        "ELEV": "719",
+        "LAT": "36.072040",
+        "LON": "-99.903080",
+        "NAME": "Arnett"
+    },
+    "BBOW": {
+        "ELEV": "113",
+        "LAT": "34.014400",
+        "LON": "-94.613100",
+        "NAME": "Broken Bow"
+    },
+    "BEAV": {
+        "ELEV": "758",
+        "LAT": "36.802530",
+        "LON": "-100.530120",
+        "NAME": "Beaver"
+    },
+    "BEEX": {
+        "ELEV": "196",
+        "LAT": "34.191210",
+        "LON": "-96.643860",
+        "NAME": "Bee"
+    },
+    "BESS": {
+        "ELEV": "511",
+        "LAT": "35.401850",
+        "LON": "-99.058470",
+        "NAME": "Bessie"
+    },
+    "BIXB": {
+        "ELEV": "184",
+        "LAT": "35.963050",
+        "LON": "-95.866210",
+        "NAME": "Bixby"
+    },
+    "BLAC": {
+        "ELEV": "304",
+        "LAT": "36.754430",
+        "LON": "-97.254520",
+        "NAME": "Blackwell"
+    },
+    "BOIS": {
+        "ELEV": "1267",
+        "LAT": "36.692560",
+        "LON": "-102.497130",
+        "NAME": "Boise City"
+    },
+    "BOWL": {
+        "ELEV": "281",
+        "LAT": "35.171560",
+        "LON": "-96.631210",
+        "NAME": "Bowlegs"
+    },
+    "BREC": {
+        "ELEV": "352",
+        "LAT": "36.412010",
+        "LON": "-97.693940",
+        "NAME": "Breckinridge"
+    },
+    "BRIS": {
+        "ELEV": "239",
+        "LAT": "35.780500",
+        "LON": "-96.354040",
+        "NAME": "Bristow"
+    },
+    "BROK": {
+        "ELEV": "113",
+        "LAT": "34.043300",
+        "LON": "-94.624400",
+        "NAME": "Broken Bow"
+    },
+    "BUFF": {
+        "ELEV": "559",
+        "LAT": "36.831290",
+        "LON": "-99.641010",
+        "NAME": "Buffalo"
+    },
+    "BURB": {
+        "ELEV": "301",
+        "LAT": "36.634590",
+        "LON": "-96.810460",
+        "NAME": "Burbank"
+    },
+    "BURN": {
+        "ELEV": "228",
+        "LAT": "33.893760",
+        "LON": "-97.269180",
+        "NAME": "Burneyville"
+    },
+    "BUTL": {
+        "ELEV": "520",
+        "LAT": "35.591500",
+        "LON": "-99.270590",
+        "NAME": "Butler"
+    },
+    "BYAR": {
+        "ELEV": "345",
+        "LAT": "34.849700",
+        "LON": "-97.003300",
+        "NAME": "Byars"
+    },
+    "CALV": {
+        "ELEV": "234",
+        "LAT": "34.992400",
+        "LON": "-96.334220",
+        "NAME": "Calvin"
+    },
+    "CAMA": {
+        "ELEV": "589",
+        "LAT": "36.028660",
+        "LON": "-99.346520",
+        "NAME": "Camargo"
+    },
+    "CARL": {
+        "ELEV": "293",
+        "LAT": "36.147300",
+        "LON": "-97.285850",
+        "NAME": "Lake Carl Blackwell"
+    },
+    "CATO": {
+        "ELEV": "232",
+        "LAT": "36.261900",
+        "LON": "-95.757200",
+        "NAME": "Catoosa"
+    },
+    "CENT": {
+        "ELEV": "208",
+        "LAT": "34.608960",
+        "LON": "-96.333090",
+        "NAME": "Centrahoma"
+    },
+    "CHAN": {
+        "ELEV": "291",
+        "LAT": "35.652820",
+        "LON": "-96.804070",
+        "NAME": "Chandler"
+    },
+    "CHER": {
+        "ELEV": "362",
+        "LAT": "36.748130",
+        "LON": "-98.362740",
+        "NAME": "Cherokee"
+    },
+    "CHEY": {
+        "ELEV": "694",
+        "LAT": "35.546150",
+        "LON": "-99.727900",
+        "NAME": "Cheyenne"
+    },
+    "CHIC": {
+        "ELEV": "328",
+        "LAT": "35.032360",
+        "LON": "-97.914460",
+        "NAME": "Chickasha"
+    },
+    "CLAR": {
+        "ELEV": "213",
+        "LAT": "36.317200",
+        "LON": "-95.641700",
+        "NAME": "Claremore"
+    },
+    "CLAY": {
+        "ELEV": "186",
+        "LAT": "34.656570",
+        "LON": "-95.325960",
+        "NAME": "Clayton"
+    },
+    "CLOU": {
+        "ELEV": "221",
+        "LAT": "34.223210",
+        "LON": "-95.248700",
+        "NAME": "Cloudy"
+    },
+    "CLRM": {
+        "ELEV": "207",
+        "LAT": "36.321120",
+        "LON": "-95.646170",
+        "NAME": "Claremore"
+    },
+    "COOK": {
+        "ELEV": "299",
+        "LAT": "35.680010",
+        "LON": "-94.848960",
+        "NAME": "Cookson"
+    },
+    "COPA": {
+        "ELEV": "250",
+        "LAT": "36.909870",
+        "LON": "-95.885530",
+        "NAME": "Copan"
+    },
+    "DURA": {
+        "ELEV": "197",
+        "LAT": "33.920750",
+        "LON": "-96.320270",
+        "NAME": "Durant"
+    },
+    "ELKC": {
+        "ELEV": "584",
+        "LAT": "35.333530",
+        "LON": "-99.393980",
+        "NAME": "Elk City"
+    },
+    "ELRE": {
+        "ELEV": "419",
+        "LAT": "35.548480",
+        "LON": "-98.036540",
+        "NAME": "El Reno"
+    },
+    "ERIC": {
+        "ELEV": "603",
+        "LAT": "35.204940",
+        "LON": "-99.803440",
+        "NAME": "Erick"
+    },
+    "EUFA": {
+        "ELEV": "200",
+        "LAT": "35.303240",
+        "LON": "-95.657070",
+        "NAME": "Eufaula"
+    },
+    "EVAX": {
+        "ELEV": "1065",
+        "LAT": "36.921853",
+        "LON": "-101.781580",
+        "NAME": "Eva"
+    },
+    "FAIR": {
+        "ELEV": "405",
+        "LAT": "36.263530",
+        "LON": "-98.497660",
+        "NAME": "Fairview"
+    },
+    "FITT": {
+        "ELEV": "350",
+        "LAT": "34.552050",
+        "LON": "-96.717790",
+        "NAME": "Fittstown"
+    },
+    "FORA": {
+        "ELEV": "330",
+        "LAT": "36.840530",
+        "LON": "-96.427770",
+        "NAME": "Foraker"
+    },
+    "FREE": {
+        "ELEV": "530",
+        "LAT": "36.725620",
+        "LON": "-99.142340",
+        "NAME": "Freedom"
+    },
+    "FTCB": {
+        "ELEV": "422",
+        "LAT": "35.148870",
+        "LON": "-98.466070",
+        "NAME": "Fort Cobb"
+    },
+    "GOOD": {
+        "ELEV": "997",
+        "LAT": "36.601830",
+        "LON": "-101.601300",
+        "NAME": "Goodwell"
+    },
+    "GRA2": {
+        "ELEV": "341",
+        "LAT": "34.239444",
+        "LON": "-98.743583",
+        "NAME": "Grandfield"
+    },
+    "GRAN": {
+        "ELEV": "342",
+        "LAT": "34.239200",
+        "LON": "-98.739700",
+        "NAME": "Grandfield"
+    },
+    "GUTH": {
+        "ELEV": "330",
+        "LAT": "35.848910",
+        "LON": "-97.479780",
+        "NAME": "Guthrie"
+    },
+    "HASK": {
+        "ELEV": "183",
+        "LAT": "35.747980",
+        "LON": "-95.640470",
+        "NAME": "Haskell"
+    },
+    "HECT": {
+        "ELEV": "243",
+        "LAT": "35.841620",
+        "LON": "-96.002400",
+        "NAME": "Hectorville"
+    },
+    "HINT": {
+        "ELEV": "493",
+        "LAT": "35.484390",
+        "LON": "-98.481510",
+        "NAME": "Hinton"
+    },
+    "HOBA": {
+        "ELEV": "473",
+        "LAT": "34.989710",
+        "LON": "-99.052830",
+        "NAME": "Hobart"
+    },
+    "HOLD": {
+        "ELEV": "280",
+        "LAT": "35.070730",
+        "LON": "-96.355950",
+        "NAME": "Holdenville"
+    },
+    "HOLL": {
+        "ELEV": "497",
+        "LAT": "34.685500",
+        "LON": "-99.833310",
+        "NAME": "Hollis"
+    },
+    "HOOK": {
+        "ELEV": "912",
+        "LAT": "36.855180",
+        "LON": "-101.225470",
+        "NAME": "Hooker"
+    },
+    "HUGO": {
+        "ELEV": "175",
+        "LAT": "34.030840",
+        "LON": "-95.540110",
+        "NAME": "Hugo"
+    },
+    "IDAB": {
+        "ELEV": "110",
+        "LAT": "33.830130",
+        "LON": "-94.880300",
+        "NAME": "Idabel"
+    },
+    "INOL": {
+        "ELEV": "190",
+        "LAT": "36.142460",
+        "LON": "-95.450670",
+        "NAME": "Inola"
+    },
+    "JAYX": {
+        "ELEV": "304",
+        "LAT": "36.482100",
+        "LON": "-94.782870",
+        "NAME": "Jay"
+    },
+    "KENT": {
+        "ELEV": "1322",
+        "LAT": "36.829370",
+        "LON": "-102.878200",
+        "NAME": "Kenton"
+    },
+    "KETC": {
+        "ELEV": "341",
+        "LAT": "34.528870",
+        "LON": "-97.764840",
+        "NAME": "Ketchum Ranch"
+    },
+    "KIN2": {
+        "ELEV": "323",
+        "LAT": "35.854310",
+        "LON": "-97.954420",
+        "NAME": "Kingfisher"
+    },
+    "KING": {
+        "ELEV": "319",
+        "LAT": "35.880500",
+        "LON": "-97.911210",
+        "NAME": "Kingfisher"
+    },
+    "LAHO": {
+        "ELEV": "396",
+        "LAT": "36.384350",
+        "LON": "-98.111390",
+        "NAME": "Lahoma"
+    },
+    "LANE": {
+        "ELEV": "181",
+        "LAT": "34.308760",
+        "LON": "-95.997160",
+        "NAME": "Lane"
+    },
+    "MADI": {
+        "ELEV": "232",
+        "LAT": "34.035790",
+        "LON": "-96.943940",
+        "NAME": "Madill"
+    },
+    "MANG": {
+        "ELEV": "460",
+        "LAT": "34.835920",
+        "LON": "-99.423980",
+        "NAME": "Mangum"
+    },
+    "MARE": {
+        "ELEV": "327",
+        "LAT": "36.064340",
+        "LON": "-97.212710",
+        "NAME": "Marena"
+    },
+    "MARS": {
+        "ELEV": "315",
+        "LAT": "36.118600",
+        "LON": "-97.601400",
+        "NAME": "Marshall"
+    },
+    "MAYR": {
+        "ELEV": "555",
+        "LAT": "36.987070",
+        "LON": "-99.011090",
+        "NAME": "May Ranch"
+    },
+    "MCAL": {
+        "ELEV": "230",
+        "LAT": "34.882310",
+        "LON": "-95.780960",
+        "NAME": "McAlester"
+    },
+    "MEDF": {
+        "ELEV": "332",
+        "LAT": "36.792420",
+        "LON": "-97.745770",
+        "NAME": "Medford"
+    },
+    "MEDI": {
+        "ELEV": "487",
+        "LAT": "34.729210",
+        "LON": "-98.569360",
+        "NAME": "Medicine Park"
+    },
+    "MIAM": {
+        "ELEV": "247",
+        "LAT": "36.888320",
+        "LON": "-94.844370",
+        "NAME": "Miami"
+    },
+    "MINC": {
+        "ELEV": "430",
+        "LAT": "35.272250",
+        "LON": "-97.955530",
+        "NAME": "Minco"
+    },
+    "MRSH": {
+        "ELEV": "311",
+        "LAT": "36.116850",
+        "LON": "-97.606850",
+        "NAME": "Marshall"
+    },
+    "MTHE": {
+        "ELEV": "284",
+        "LAT": "34.310720",
+        "LON": "-94.822750",
+        "NAME": "Mt Herman"
+    },
+    "NEWK": {
+        "ELEV": "366",
+        "LAT": "36.898100",
+        "LON": "-96.910350",
+        "NAME": "Newkirk"
+    },
+    "NEWP": {
+        "ELEV": "283",
+        "LAT": "34.228100",
+        "LON": "-97.201420",
+        "NAME": "Newport"
+    },
+    "NINN": {
+        "ELEV": "356",
+        "LAT": "34.967740",
+        "LON": "-97.952020",
+        "NAME": "Ninnekah"
+    },
+    "NORM": {
+        "ELEV": "360",
+        "LAT": "35.255600",
+        "LON": "-97.483600",
+        "NAME": "Norman"
+    },
+    "NOWA": {
+        "ELEV": "206",
+        "LAT": "36.743740",
+        "LON": "-95.607950",
+        "NAME": "Nowata"
+    },
+    "NRMN": {
+        "ELEV": "357",
+        "LAT": "35.236110",
+        "LON": "-97.464880",
+        "NAME": "Norman"
+    },
+    "OILT": {
+        "ELEV": "255",
+        "LAT": "36.031260",
+        "LON": "-96.497490",
+        "NAME": "Oilton"
+    },
+    "OKCE": {
+        "ELEV": "355",
+        "LAT": "35.472260",
+        "LON": "-97.464140",
+        "NAME": "Oklahoma City East"
+    },
+    "OKCN": {
+        "ELEV": "362",
+        "LAT": "35.555600",
+        "LON": "-97.510700",
+        "NAME": "Oklahoma City North"
+    },
+    "OKCW": {
+        "ELEV": "366",
+        "LAT": "35.471120",
+        "LON": "-97.582450",
+        "NAME": "Oklahoma City West"
+    },
+    "OKEM": {
+        "ELEV": "263",
+        "LAT": "35.431720",
+        "LON": "-96.262650",
+        "NAME": "Okemah"
+    },
+    "OKMU": {
+        "ELEV": "205",
+        "LAT": "35.582110",
+        "LON": "-95.914730",
+        "NAME": "Okmulgee"
+    },
+    "PAUL": {
+        "ELEV": "291",
+        "LAT": "34.715500",
+        "LON": "-97.229240",
+        "NAME": "Pauls Valley"
+    },
+    "PAWN": {
+        "ELEV": "283",
+        "LAT": "36.361140",
+        "LON": "-96.769860",
+        "NAME": "Pawnee"
+    },
+    "PERK": {
+        "ELEV": "292",
+        "LAT": "35.998650",
+        "LON": "-97.048310",
+        "NAME": "Perkins"
+    },
+    "PORT": {
+        "ELEV": "193",
+        "LAT": "35.825700",
+        "LON": "-95.559760",
+        "NAME": "Porter"
+    },
+    "PRES": {
+        "ELEV": "300",
+        "LAT": "35.724700",
+        "LON": "-95.988600",
+        "NAME": "Preston"
+    },
+    "PRYO": {
+        "ELEV": "201",
+        "LAT": "36.369140",
+        "LON": "-95.271380",
+        "NAME": "Pryor"
+    },
+    "PUTN": {
+        "ELEV": "589",
+        "LAT": "35.899040",
+        "LON": "-98.960380",
+        "NAME": "Putnam"
+    },
+    "REDR": {
+        "ELEV": "293",
+        "LAT": "36.355900",
+        "LON": "-97.153060",
+        "NAME": "Red Rock"
+    },
+    "RETR": {
+        "ELEV": "538",
+        "LAT": "35.122750",
+        "LON": "-99.360010",
+        "NAME": "Retrop"
+    },
+    "RING": {
+        "ELEV": "283",
+        "LAT": "34.193650",
+        "LON": "-97.588120",
+        "NAME": "Ringling"
+    },
+    "SALL": {
+        "ELEV": "157",
+        "LAT": "35.438150",
+        "LON": "-94.798050",
+        "NAME": "Sallisaw"
+    },
+    "SEIL": {
+        "ELEV": "545",
+        "LAT": "36.190330",
+        "LON": "-99.040300",
+        "NAME": "Seiling"
+    },
+    "SHAW": {
+        "ELEV": "328",
+        "LAT": "35.364920",
+        "LON": "-96.948220",
+        "NAME": "Shawnee"
+    },
+    "SKIA": {
+        "ELEV": "282",
+        "LAT": "36.415300",
+        "LON": "-96.037060",
+        "NAME": "Skiatook"
+    },
+    "SLAP": {
+        "ELEV": "774",
+        "LAT": "36.597490",
+        "LON": "-100.261920",
+        "NAME": "Slapout"
+    },
+    "SPEN": {
+        "ELEV": "373",
+        "LAT": "35.542080",
+        "LON": "-97.341460",
+        "NAME": "Spencer"
+    },
+    "STIG": {
+        "ELEV": "173",
+        "LAT": "35.265270",
+        "LON": "-95.181160",
+        "NAME": "Stigler"
+    },
+    "STIL": {
+        "ELEV": "272",
+        "LAT": "36.120930",
+        "LON": "-97.095270",
+        "NAME": "Stillwater"
+    },
+    "STUA": {
+        "ELEV": "256",
+        "LAT": "34.876420",
+        "LON": "-96.069820",
+        "NAME": "Stuart"
+    },
+    "SULP": {
+        "ELEV": "320",
+        "LAT": "34.566100",
+        "LON": "-96.950480",
+        "NAME": "Sulphur"
+    },
+    "TAHL": {
+        "ELEV": "290",
+        "LAT": "35.972350",
+        "LON": "-94.986710",
+        "NAME": "Tahlequah"
+    },
+    "TALA": {
+        "ELEV": "228",
+        "LAT": "36.574310",
+        "LON": "-95.745150",
+        "NAME": "Talala"
+    },
+    "TALI": {
+        "ELEV": "204",
+        "LAT": "34.710700",
+        "LON": "-95.011520",
+        "NAME": "Talihina"
+    },
+    "TIPT": {
+        "ELEV": "387",
+        "LAT": "34.439720",
+        "LON": "-99.137550",
+        "NAME": "Tipton"
+    },
+    "TISH": {
+        "ELEV": "268",
+        "LAT": "34.332620",
+        "LON": "-96.678950",
+        "NAME": "Tishomingo"
+    },
+    "TULL": {
+        "ELEV": "189",
+        "LAT": "35.839700",
+        "LON": "-95.413300",
+        "NAME": "Tullahassee"
+    },
+    "TULN": {
+        "ELEV": "209",
+        "LAT": "36.196660",
+        "LON": "-95.938830",
+        "NAME": "Tulsa"
+    },
+    "VALL": {
+        "ELEV": "120",
+        "LAT": "33.938606",
+        "LON": "-95.114913",
+        "NAME": "Valliant"
+    },
+    "VANO": {
+        "ELEV": "320",
+        "LAT": "34.791460",
+        "LON": "-96.843810",
+        "NAME": "Vanoss"
+    },
+    "VINI": {
+        "ELEV": "236",
+        "LAT": "36.775360",
+        "LON": "-95.220940",
+        "NAME": "Vinita"
+    },
+    "WAL2": {
+        "ELEV": "323",
+        "LAT": "34.399570",
+        "LON": "-98.345690",
+        "NAME": "Walters"
+    },
+    "WALT": {
+        "ELEV": "308",
+        "LAT": "34.364700",
+        "LON": "-98.320250",
+        "NAME": "Walters"
+    },
+    "WASH": {
+        "ELEV": "345",
+        "LAT": "34.982240",
+        "LON": "-97.521090",
+        "NAME": "Washington"
+    },
+    "WATO": {
+        "ELEV": "517",
+        "LAT": "35.841850",
+        "LON": "-98.526150",
+        "NAME": "Watonga"
+    },
+    "WAUR": {
+        "ELEV": "283",
+        "LAT": "34.167750",
+        "LON": "-97.988150",
+        "NAME": "Waurika"
+    },
+    "WEAT": {
+        "ELEV": "538",
+        "LAT": "35.508300",
+        "LON": "-98.775090",
+        "NAME": "Weatherford"
+    },
+    "WEBB": {
+        "ELEV": "145",
+        "LAT": "35.472980",
+        "LON": "-95.132090",
+        "NAME": "Webbers Falls"
+    },
+    "WEBR": {
+        "ELEV": "145",
+        "LAT": "35.489000",
+        "LON": "-95.123300",
+        "NAME": "Webbers Falls"
+    },
+    "WEST": {
+        "ELEV": "348",
+        "LAT": "36.011000",
+        "LON": "-94.644960",
+        "NAME": "Westville"
+    },
+    "WILB": {
+        "ELEV": "199",
+        "LAT": "34.900920",
+        "LON": "-95.348050",
+        "NAME": "Wilburton"
+    },
+    "WIST": {
+        "ELEV": "143",
+        "LAT": "34.984260",
+        "LON": "-94.687780",
+        "NAME": "Wister"
+    },
+    "WOOD": {
+        "ELEV": "625",
+        "LAT": "36.423290",
+        "LON": "-99.416820",
+        "NAME": "Woodward"
+    },
+    "WYNO": {
+        "ELEV": "269",
+        "LAT": "36.518060",
+        "LON": "-96.342220",
+        "NAME": "Wynona"
+    }
+}

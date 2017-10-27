@@ -1,0 +1,1289 @@
+[
+    {
+        "id": "KABR", 
+        "latitude": 45.45583333333334, 
+        "longitude": -98.41305541992188, 
+        "metar": "KABR", 
+        "name": "Aberdeen, SD", 
+        "x_pix": 378.97391274125914, 
+        "y_pix": 371.40090626652369
+    }, 
+    {
+        "id": "KABX", 
+        "latitude": 35.14972222222222, 
+        "longitude": -106.82389068603516, 
+        "metar": "KAEG", 
+        "name": "Albuquerque, NM", 
+        "x_pix": 250.71494365530228, 
+        "y_pix": 187.19063907043466
+    }, 
+    {
+        "id": "KAKQ", 
+        "latitude": 36.98388888888889, 
+        "longitude": -77.0072250366211, 
+        "metar": "KAKQ", 
+        "name": "Wakefield, VA", 
+        "x_pix": 689.11945121182055, 
+        "y_pix": 248.08964651809433
+    }, 
+    {
+        "id": "KAMA", 
+        "latitude": 35.233333333333334, 
+        "longitude": -101.70916748046875, 
+        "metar": "KAMA", 
+        "name": "Amarillo, TX", 
+        "x_pix": 327.54966412803981, 
+        "y_pix": 182.96152599274899
+    }, 
+    {
+        "id": "KAMX", 
+        "latitude": 25.611111111111114, 
+        "longitude": -80.41278076171875, 
+        "metar": "KTMB", 
+        "name": "Miami, FL", 
+        "x_pix": 679.64566797319014, 
+        "y_pix": 28.374231470503435
+    }, 
+    {
+        "id": "KAPX", 
+        "latitude": 44.907222222222224, 
+        "longitude": -84.71971893310547, 
+        "metar": "KGLR", 
+        "name": "Gaylord, MI", 
+        "x_pix": 557.39380861871473, 
+        "y_pix": 372.95398156494355
+    }, 
+    {
+        "id": "KARX", 
+        "latitude": 43.82277777777778, 
+        "longitude": -91.19110870361328, 
+        "metar": "KLSE", 
+        "name": "LaCrosse, WI", 
+        "x_pix": 474.6370710144646, 
+        "y_pix": 343.85001267367062
+    }, 
+    {
+        "id": "KATX", 
+        "latitude": 48.19444444444444, 
+        "longitude": -122.49583435058594, 
+        "metar": "KOKH", 
+        "name": "Seattle, WA", 
+        "x_pix": 84.585070005281565, 
+        "y_pix": 465.40392061543196
+    }, 
+    {
+        "id": "KBBX", 
+        "latitude": 39.49611111111111, 
+        "longitude": -121.63166809082031, 
+        "metar": "KOVE", 
+        "name": "Beale AFB, CA", 
+        "x_pix": 52.799577139499249, 
+        "y_pix": 306.15834686353764
+    }, 
+    {
+        "id": "KBGM", 
+        "latitude": 42.19972222222222, 
+        "longitude": -75.98472595214844, 
+        "metar": "KBGM", 
+        "name": "Binghamton, NY", 
+        "x_pix": 681.2541839174587, 
+        "y_pix": 345.61694883906398
+    }, 
+    {
+        "id": "KBHX", 
+        "latitude": 40.498333333333335, 
+        "longitude": -124.29194641113281, 
+        "metar": "KFOT", 
+        "name": "Eureka, CA", 
+        "x_pix": 21.916181713989602, 
+        "y_pix": 334.46942943167983
+    }, 
+    {
+        "id": "KBIS", 
+        "latitude": 46.770833333333336, 
+        "longitude": -100.76055908203125, 
+        "metar": "KBIS", 
+        "name": "Bismarck, ND", 
+        "x_pix": 349.41867186688734, 
+        "y_pix": 396.6665973506457
+    }, 
+    {
+        "id": "KBLX", 
+        "latitude": 45.85388888888889, 
+        "longitude": -108.6066665649414, 
+        "metar": "KBIL", 
+        "name": "Billings, MT", 
+        "x_pix": 248.06093586349721, 
+        "y_pix": 387.59067519631424
+    }, 
+    {
+        "id": "KBMX", 
+        "latitude": 33.17222222222222, 
+        "longitude": -86.76972198486328, 
+        "metar": "KEET", 
+        "name": "Birmingham, AL", 
+        "x_pix": 556.24364704388097, 
+        "y_pix": 152.99697454615225
+    }, 
+    {
+        "id": "KBOX", 
+        "latitude": 41.95583333333334, 
+        "longitude": -71.13694763183594, 
+        "metar": "KTAN", 
+        "name": "Boston, MA", 
+        "x_pix": 746.30814923495336, 
+        "y_pix": 358.64147353994775
+    }, 
+    {
+        "id": "KBRO", 
+        "latitude": 25.91611111111111, 
+        "longitude": -97.41889190673828, 
+        "metar": "KBRO", 
+        "name": "Brownsville, TX", 
+        "x_pix": 392.18620353189829, 
+        "y_pix": 6.6814307283918488
+    }, 
+    {
+        "id": "KBYX", 
+        "latitude": 24.59753, 
+        "longitude": -81.70302, 
+        "metar": "KNQX", 
+        "name": "Key West, FL", 
+        "x_pix": 661.37750836289058, 
+        "y_pix": 5.3453642964772055
+    }, 
+    {
+        "id": "KCXX", 
+        "latitude": 44.51111111111111, 
+        "longitude": -73.16694641113281, 
+        "metar": "KBTV", 
+        "name": "Burlington, VT", 
+        "x_pix": 707.16921374524895, 
+        "y_pix": 396.74525602642007
+    }, 
+    {
+        "id": "KBUF", 
+        "latitude": 42.94888888888889, 
+        "longitude": -78.73666381835938, 
+        "metar": "KBUF", 
+        "name": "Buffalo, NY", 
+        "x_pix": 641.8478510474207, 
+        "y_pix": 350.9181905263805
+    }, 
+    {
+        "id": "KCAE", 
+        "latitude": 33.948611111111106, 
+        "longitude": -81.11833190917969, 
+        "metar": "KCAE", 
+        "name": "Columbia, SC", 
+        "x_pix": 640.02343740990784, 
+        "y_pix": 180.32652928467658
+    }, 
+    {
+        "id": "KCBW", 
+        "latitude": 46.03916666666667, 
+        "longitude": -67.80638885498047, 
+        "metar": "KHUL", 
+        "name": "Caribou, ME", 
+        "x_pix": 765.53676781932108, 
+        "y_pix": 444.59856131498771
+    }, 
+    {
+        "id": "KCBX", 
+        "latitude": 43.49055555555556, 
+        "longitude": -116.23555755615234, 
+        "metar": "KBOI", 
+        "name": "Boise, ID", 
+        "x_pix": 142.18487467073317, 
+        "y_pix": 360.69840266582628
+    }, 
+    {
+        "id": "KCCX", 
+        "latitude": 40.92305555555555, 
+        "longitude": -78.00360870361328, 
+        "metar": "KUNV", 
+        "name": "State College, PA", 
+        "x_pix": 659.43893527604098, 
+        "y_pix": 316.25006707701215
+    }, 
+    {
+        "id": "KCLE", 
+        "latitude": 41.41305555555555, 
+        "longitude": -81.85972595214844, 
+        "metar": "KCLE", 
+        "name": "Cleveland, OH", 
+        "x_pix": 605.3575754157041, 
+        "y_pix": 314.82358461991339
+    }, 
+    {
+        "id": "KCLX", 
+        "latitude": 32.65555555555555, 
+        "longitude": -81.04222106933594, 
+        "metar": "KNBC", 
+        "name": "Charleston, SC", 
+        "x_pix": 645.46743420691871, 
+        "y_pix": 156.83474702910976
+    }, 
+    {
+        "id": "KCRP", 
+        "latitude": 27.784166666666668, 
+        "longitude": -97.5111083984375, 
+        "metar": "KCRP", 
+        "name": "Corpus Christi, TX", 
+        "x_pix": 390.62832016834386, 
+        "y_pix": 42.084348951337518
+    }, 
+    {
+        "id": "KCYS", 
+        "latitude": 41.151944444444446, 
+        "longitude": -104.80611419677734, 
+        "metar": "KCYS", 
+        "name": "Cheyenne, WY", 
+        "x_pix": 289.81720672570844, 
+        "y_pix": 295.39337323355579
+    }, 
+    {
+        "id": "KDAX", 
+        "latitude": 38.50111111111111, 
+        "longitude": -121.67778015136719, 
+        "metar": "KEDU", 
+        "name": "Sacramento, CA", 
+        "x_pix": 47.364162924885484, 
+        "y_pix": 288.53029899112369
+    }, 
+    {
+        "id": "KDDC", 
+        "latitude": 37.76083333333333, 
+        "longitude": -99.96888732910156, 
+        "metar": "KDDC", 
+        "name": "Dodge City, KS", 
+        "x_pix": 354.95920350453491, 
+        "y_pix": 228.89218165002478
+    }, 
+    {
+        "id": "KDFX", 
+        "latitude": 29.272777777777776, 
+        "longitude": -100.28055572509766, 
+        "metar": "KDLF", 
+        "name": "Laughlin AFB, TX", 
+        "x_pix": 345.63917820986444, 
+        "y_pix": 70.839651831194359
+    }, 
+    {
+        "id": "KDGX", 
+        "latitude": 32.28001, 
+        "longitude": -89.98417, 
+        "metar": "KJAN", 
+        "name": "Jackson, MS", 
+        "x_pix": 508.18484987753732, 
+        "y_pix": 131.38396527745456
+    }, 
+    {
+        "id": "KDIX", 
+        "latitude": 39.94694444444444, 
+        "longitude": -74.41083526611328, 
+        "metar": "KNEL", 
+        "name": "Philadelphia, PA", 
+        "x_pix": 712.46409319815916, 
+        "y_pix": 310.41807209493777
+    }, 
+    {
+        "id": "KDLH", 
+        "latitude": 46.83694444444445, 
+        "longitude": -92.20972442626953, 
+        "metar": "KDLH", 
+        "name": "Duluth, MN", 
+        "x_pix": 457.87862838980629, 
+        "y_pix": 399.12578568907986
+    }, 
+    {
+        "id": "KDMX", 
+        "latitude": 41.73111111111111, 
+        "longitude": -93.7227783203125, 
+        "metar": "KIKV", 
+        "name": "Des Moines, IA", 
+        "x_pix": 442.62495180006943, 
+        "y_pix": 303.12831644940354
+    }, 
+    {
+        "id": "KDOX", 
+        "latitude": 38.82555555555556, 
+        "longitude": -75.4397201538086, 
+        "metar": "KGED", 
+        "name": "Dover AFB, DE", 
+        "x_pix": 703.37105783076572, 
+        "y_pix": 286.63675463986652
+    }, 
+    {
+        "id": "KDTX", 
+        "latitude": 42.69972222222222, 
+        "longitude": -83.47166442871094, 
+        "metar": "KPTK", 
+        "name": "Detroit, MI", 
+        "x_pix": 579.79352478600197, 
+        "y_pix": 334.78531196391481
+    }, 
+    {
+        "id": "KDVN", 
+        "latitude": 41.611666666666665, 
+        "longitude": -90.5808334350586, 
+        "metar": "KDVN", 
+        "name": "Quad Cities/Davenport, IA", 
+        "x_pix": 485.82617166305414, 
+        "y_pix": 303.47753315619872
+    }, 
+    {
+        "id": "KDYX", 
+        "latitude": 32.538333333333334, 
+        "longitude": -99.25444793701172, 
+        "metar": "KBKD", 
+        "name": "Dyess AFB, TX", 
+        "x_pix": 363.47612591030429, 
+        "y_pix": 131.56913537883563
+    }, 
+    {
+        "id": "KEAX", 
+        "latitude": 38.81027777777778, 
+        "longitude": -94.26444244384766, 
+        "metar": "KLXT", 
+        "name": "Kansas City, MO", 
+        "x_pix": 437.10843590117406, 
+        "y_pix": 248.69461327713788
+    }, 
+    {
+        "id": "KEMX", 
+        "latitude": 31.89361111111111, 
+        "longitude": -110.63027954101562, 
+        "metar": "KALK", 
+        "name": "Tucson, AZ", 
+        "x_pix": 185.21060253581081, 
+        "y_pix": 134.28598167997089
+    }, 
+    {
+        "id": "KENX", 
+        "latitude": 42.58638888888889, 
+        "longitude": -74.06388854980469, 
+        "metar": "KSCH", 
+        "name": "Albany, NY", 
+        "x_pix": 704.81688589305679, 
+        "y_pix": 359.03065199258862
+    }, 
+    {
+        "id": "KEOX", 
+        "latitude": 31.460555555555555, 
+        "longitude": -85.45944213867188, 
+        "metar": "KDHN", 
+        "name": "Ft. Rucker, AL", 
+        "x_pix": 580.51412502216237, 
+        "y_pix": 123.87488907941746
+    }, 
+    {
+        "id": "KEPZ", 
+        "latitude": 31.873055555555556, 
+        "longitude": -106.69805908203125, 
+        "metar": "K5T6", 
+        "name": "El Paso, TX", 
+        "x_pix": 246.48947966533211, 
+        "y_pix": 126.26006257048273
+    }, 
+    {
+        "id": "KESX", 
+        "latitude": 35.70111111111111, 
+        "longitude": -114.89138793945312, 
+        "metar": "KBVU", 
+        "name": "Las Vegas, NV", 
+        "x_pix": 132.56178014791263, 
+        "y_pix": 215.19849534584299
+    }, 
+    {
+        "id": "KEVX", 
+        "latitude": 30.564444444444444, 
+        "longitude": -85.92138671875, 
+        "metar": "KECP", 
+        "name": "Eglin AFB, FL", 
+        "x_pix": 575.38776949007161, 
+        "y_pix": 106.27874864685745
+    }, 
+    {
+        "id": "KEWX", 
+        "latitude": 29.703888888888887, 
+        "longitude": -98.02833557128906, 
+        "metar": "KBAZ", 
+        "name": "San Antonio, TX", 
+        "x_pix": 382.27421662558794, 
+        "y_pix": 78.269744400863544
+    }, 
+    {
+        "id": "KEYX", 
+        "latitude": 35.09777777777778, 
+        "longitude": -117.56083679199219, 
+        "metar": "K9L2", 
+        "name": "Edwards AFB, CA", 
+        "x_pix": 91.093163885528924, 
+        "y_pix": 212.49849017948435
+    }, 
+    {
+        "id": "KFCX", 
+        "latitude": 37.02444444444444, 
+        "longitude": -80.27388763427734, 
+        "metar": "KBCB", 
+        "name": "Blacksburg, VA", 
+        "x_pix": 642.05329629289076, 
+        "y_pix": 238.85295373154986
+    }, 
+    {
+        "id": "KFDR", 
+        "latitude": 34.36222222222222, 
+        "longitude": -98.97638702392578, 
+        "metar": "KFDR", 
+        "name": "Frederick, OK", 
+        "x_pix": 368.35496391537868, 
+        "y_pix": 165.46866982694701
+    }, 
+    {
+        "id": "KFDX", 
+        "latitude": 34.63527777777778, 
+        "longitude": -103.62999725341797, 
+        "metar": "K4MR", 
+        "name": "Cannon AFB, NM", 
+        "x_pix": 297.97481634436951, 
+        "y_pix": 173.52614384601873
+    }, 
+    {
+        "id": "KFFC", 
+        "latitude": 33.36277777777778, 
+        "longitude": -84.56583404541016, 
+        "metar": "KFFC", 
+        "name": "Atlanta, GA", 
+        "x_pix": 589.51260355203419, 
+        "y_pix": 160.97652368964987
+    }, 
+    {
+        "id": "KFSD", 
+        "latitude": 43.58777777777778, 
+        "longitude": -96.72944641113281, 
+        "metar": "KFSD", 
+        "name": "Sioux Falls, SD", 
+        "x_pix": 401.0952133634334, 
+        "y_pix": 336.58304541918193
+    }, 
+    {
+        "id": "KFSX", 
+        "latitude": 34.574444444444445, 
+        "longitude": -111.1977767944336, 
+        "metar": "KPAN", 
+        "name": "Flagstaff, AZ", 
+        "x_pix": 183.82208513965293, 
+        "y_pix": 185.01200207321486
+    }, 
+    {
+        "id": "KFTG", 
+        "latitude": 39.78666666666666, 
+        "longitude": -104.54582977294922, 
+        "metar": "KFTG", 
+        "name": "Denver, CO", 
+        "x_pix": 291.46508694653375, 
+        "y_pix": 269.85822595201984
+    }, 
+    {
+        "id": "KFWS", 
+        "latitude": 32.573055555555555, 
+        "longitude": -97.30305480957031, 
+        "metar": "KFWS", 
+        "name": "Ft. Worth, TX", 
+        "x_pix": 393.87961702985439, 
+        "y_pix": 131.95400617079841
+    }, 
+    {
+        "id": "KGGW", 
+        "latitude": 48.20638888888889, 
+        "longitude": -106.625, 
+        "metar": "KGGW", 
+        "name": "Glasgow, MT", 
+        "x_pix": 277.81099751301628, 
+        "y_pix": 428.57147006400191
+    }, 
+    {
+        "id": "KGJX", 
+        "latitude": 39.06222222222222, 
+        "longitude": -108.2138900756836, 
+        "metar": "KGJT", 
+        "name": "Grand Junction, CO", 
+        "x_pix": 238.3785263077975, 
+        "y_pix": 261.61681231990502
+    }, 
+    {
+        "id": "KGLD", 
+        "latitude": 39.36694444444444, 
+        "longitude": -101.70027923583984, 
+        "metar": "KGLD", 
+        "name": "Goodland, KS", 
+        "x_pix": 331.19327236879019, 
+        "y_pix": 259.57601885596398
+    }, 
+    {
+        "id": "KGRB", 
+        "latitude": 44.498333333333335, 
+        "longitude": -88.11138916015625, 
+        "metar": "KGRB", 
+        "name": "Green Bay, WI", 
+        "x_pix": 514.15020190515725, 
+        "y_pix": 359.92677438457065
+    }, 
+    {
+        "id": "KGRK", 
+        "latitude": 30.721944444444443, 
+        "longitude": -97.383056640625, 
+        "metar": "KGTU", 
+        "name": "Ft. Hood, TX", 
+        "x_pix": 392.67770691097377, 
+        "y_pix": 97.34365149975531
+    }, 
+    {
+        "id": "KGRR", 
+        "latitude": 42.89388888888889, 
+        "longitude": -85.54472351074219, 
+        "metar": "KGRR", 
+        "name": "Grand Rapids, MI", 
+        "x_pix": 551.57314156841801, 
+        "y_pix": 334.32918942424283
+    }, 
+    {
+        "id": "KGSP", 
+        "latitude": 34.88333333333333, 
+        "longitude": -82.22000122070312, 
+        "metar": "KGSP", 
+        "name": "Greer, SC", 
+        "x_pix": 620.54564612051377, 
+        "y_pix": 194.52186430231433
+    }, 
+    {
+        "id": "KGWX", 
+        "latitude": 33.89666666666667, 
+        "longitude": -88.32888793945312, 
+        "metar": "KCBM", 
+        "name": "Columbus AFB, MS", 
+        "x_pix": 530.94759272128329, 
+        "y_pix": 163.76522221129707
+    }, 
+    {
+        "id": "KGYX", 
+        "latitude": 43.89138888888889, 
+        "longitude": -70.25638580322266, 
+        "metar": "KLEW", 
+        "name": "Portland, ME", 
+        "x_pix": 747.30762188337724, 
+        "y_pix": 396.5461451208534
+    }, 
+    {
+        "id": "KHDX", 
+        "latitude": 33.07638888888889, 
+        "longitude": -106.1227798461914, 
+        "metar": "KHMN", 
+        "name": "Holloman AFB, NM", 
+        "x_pix": 257.59542481778448, 
+        "y_pix": 147.72411639655002
+    }, 
+    {
+        "id": "KHGX", 
+        "latitude": 29.471944444444443, 
+        "longitude": -95.07917022705078, 
+        "metar": "KEFD", 
+        "name": "Houston, TX", 
+        "x_pix": 430.04382055746305, 
+        "y_pix": 74.414045807763458
+    }, 
+    {
+        "id": "KHNX", 
+        "latitude": 36.314166666666665, 
+        "longitude": -119.6322250366211, 
+        "metar": "KHJO", 
+        "name": "San Joaquin Valley, CA", 
+        "x_pix": 66.126928686365105, 
+        "y_pix": 241.67332719305213
+    }, 
+    {
+        "id": "KHPX", 
+        "latitude": 36.736666666666665, 
+        "longitude": -87.28500366210938, 
+        "metar": "KCKV", 
+        "name": "Ft. Campbell, KY", 
+        "x_pix": 540.97070365157367, 
+        "y_pix": 217.92889621453133
+    }, 
+    {
+        "id": "KHTX", 
+        "latitude": 34.93055555555555, 
+        "longitude": -86.08333587646484, 
+        "metar": "KBGF", 
+        "name": "Huntsville/Hytop, AL", 
+        "x_pix": 562.70997005187496, 
+        "y_pix": 186.77005002684263
+    }, 
+    {
+        "id": "KICT", 
+        "latitude": 37.65472222222222, 
+        "longitude": -97.44277954101562, 
+        "metar": "KICT", 
+        "name": "Wichita, KS", 
+        "x_pix": 391.64449394829916, 
+        "y_pix": 226.43253047955221
+    }, 
+    {
+        "id": "KICX", 
+        "latitude": 37.590833333333336, 
+        "longitude": -112.86222076416016, 
+        "metar": "KCDC", 
+        "name": "Cedar City, UT", 
+        "x_pix": 168.23133677453546, 
+        "y_pix": 244.2866423798888
+    }, 
+    {
+        "id": "KILN", 
+        "latitude": 39.42027777777778, 
+        "longitude": -83.82166290283203, 
+        "metar": "KILN", 
+        "name": "Cincinnati/Wilmington, OH", 
+        "x_pix": 584.15286138362444, 
+        "y_pix": 273.89188574998508
+    }, 
+    {
+        "id": "KILX", 
+        "latitude": 40.150555555555556, 
+        "longitude": -89.33694458007812, 
+        "metar": "KAAA", 
+        "name": "Lincoln, IL", 
+        "x_pix": 505.2732926618433, 
+        "y_pix": 277.91006941161811
+    }, 
+    {
+        "id": "KIND", 
+        "latitude": 39.7075, 
+        "longitude": -86.28028106689453, 
+        "metar": "KIND", 
+        "name": "Indianapolis, IN", 
+        "x_pix": 548.94740605773347, 
+        "y_pix": 274.36808441195052
+    }, 
+    {
+        "id": "KINX", 
+        "latitude": 36.175, 
+        "longitude": -95.5647201538086, 
+        "metar": "KGCM", 
+        "name": "Tulsa, OK", 
+        "x_pix": 419.53818891729662, 
+        "y_pix": 199.28238524785374
+    }, 
+    {
+        "id": "KIWA", 
+        "latitude": 33.28916666666667, 
+        "longitude": -111.66999816894531, 
+        "metar": "KIWA", 
+        "name": "Phoenix, AZ", 
+        "x_pix": 173.06275257986729, 
+        "y_pix": 162.47894392145494
+    }, 
+    {
+        "id": "KIWX", 
+        "latitude": 41.35888888888889, 
+        "longitude": -85.69999694824219, 
+        "metar": "KASW", 
+        "name": "North Webster, IN", 
+        "x_pix": 553.1527331471392, 
+        "y_pix": 305.78851212526013
+    }, 
+    {
+        "id": "KJAX", 
+        "latitude": 30.484722222222224, 
+        "longitude": -81.70194244384766, 
+        "metar": "KJAX", 
+        "name": "Jacksonville, FL", 
+        "x_pix": 642.31894573304976, 
+        "y_pix": 115.02395259393752
+    }, 
+    {
+        "id": "KJGX", 
+        "latitude": 32.67527777777777, 
+        "longitude": -83.35111236572266, 
+        "metar": "KWRB", 
+        "name": "Robins AFB, GA", 
+        "x_pix": 609.99792726729027, 
+        "y_pix": 151.11986693251629
+    }, 
+    {
+        "id": "KJKL", 
+        "latitude": 37.590833333333336, 
+        "longitude": -83.31305694580078, 
+        "metar": "KJKL", 
+        "name": "Jackson, KY", 
+        "x_pix": 596.50903738500585, 
+        "y_pix": 241.4905684921863
+    }, 
+    {
+        "id": "KLBB", 
+        "latitude": 33.65416666666667, 
+        "longitude": -101.81416320800781, 
+        "metar": "KLBB", 
+        "name": "Lubbock, TX", 
+        "x_pix": 324.59195630085003, 
+        "y_pix": 153.69166631631657
+    }, 
+    {
+        "id": "KLCH", 
+        "latitude": 30.12527777777778, 
+        "longitude": -93.21583557128906, 
+        "metar": "KLCH", 
+        "name": "Lake Charles, LA", 
+        "x_pix": 459.65056551642323, 
+        "y_pix": 87.794149326460953
+    }, 
+    {
+        "id": "KLGX", 
+        "latitude": 47.11695, 
+        "longitude": -124.10649, 
+        "metar": "KHQM", 
+        "name": "Langley Hill, WA", 
+        "x_pix": 59.622978120015482, 
+        "y_pix": 451.69946871908149
+    }, 
+    {
+        "id": "KLIX", 
+        "latitude": 30.336666666666666, 
+        "longitude": -89.82555389404297, 
+        "metar": "KASD", 
+        "name": "New Orleans, LA", 
+        "x_pix": 513.69376857104464, 
+        "y_pix": 95.362502605868457
+    }, 
+    {
+        "id": "KLNX", 
+        "latitude": 41.95777777777778, 
+        "longitude": -100.57638549804688, 
+        "metar": "KTIF", 
+        "name": "North Platte, NE", 
+        "x_pix": 348.74992823677752, 
+        "y_pix": 306.96791366481511
+    }, 
+    {
+        "id": "KLOT", 
+        "latitude": 41.60472222222222, 
+        "longitude": -88.08472442626953, 
+        "metar": "KLOT", 
+        "name": "Chicago, IL", 
+        "x_pix": 520.00953171482945, 
+        "y_pix": 306.45817424377509
+    }, 
+    {
+        "id": "KLRX", 
+        "latitude": 40.73972222222222, 
+        "longitude": -116.80278015136719, 
+        "metar": "KB23", 
+        "name": "Elko, NV", 
+        "x_pix": 124.10250507467249, 
+        "y_pix": 312.35037610587625
+    }, 
+    {
+        "id": "KLSX", 
+        "latitude": 38.69888888888889, 
+        "longitude": -90.68277740478516, 
+        "metar": "KSUS", 
+        "name": "St. Louis, MO", 
+        "x_pix": 488.43942098928881, 
+        "y_pix": 249.49569849028643
+    }, 
+    {
+        "id": "KLTX", 
+        "latitude": 33.989444444444445, 
+        "longitude": -78.42888641357422, 
+        "metar": "KCRE", 
+        "name": "Wilmington, NC", 
+        "x_pix": 680.22146671248527, 
+        "y_pix": 189.1196960747848
+    }, 
+    {
+        "id": "KLVX", 
+        "latitude": 37.97527777777778, 
+        "longitude": -85.94388580322266, 
+        "metar": "KFTK", 
+        "name": "Louisville, KY", 
+        "x_pix": 557.69837818270673, 
+        "y_pix": 243.10518380081305
+    }, 
+    {
+        "id": "KLWX", 
+        "latitude": 38.97527777777778, 
+        "longitude": -77.47777557373047, 
+        "metar": "KIAD", 
+        "name": "Sterling, VA", 
+        "x_pix": 674.38732118332291, 
+        "y_pix": 282.58991324855003
+    }, 
+    {
+        "id": "KLZK", 
+        "latitude": 34.83638888888889, 
+        "longitude": -92.26222229003906, 
+        "metar": "KLIT", 
+        "name": "Little Rock, AR", 
+        "x_pix": 469.94002028206791, 
+        "y_pix": 176.4063367539996
+    }, 
+    {
+        "id": "KMAF", 
+        "latitude": 31.943333333333335, 
+        "longitude": -102.18916320800781, 
+        "metar": "KMAF", 
+        "name": "Midland/Odessa, TX", 
+        "x_pix": 317.21060556125576, 
+        "y_pix": 122.11039858412995
+    }, 
+    {
+        "id": "KMAX", 
+        "latitude": 42.08111111111111, 
+        "longitude": -122.71722412109375, 
+        "metar": "KMFR", 
+        "name": "Medford, OR", 
+        "x_pix": 50.990461239477071, 
+        "y_pix": 356.44885644377842
+    }, 
+    {
+        "id": "KMBX", 
+        "latitude": 48.3925, 
+        "longitude": -100.86499786376953, 
+        "metar": "KMOT", 
+        "name": "Minot AFB, ND", 
+        "x_pix": 349.20881266123968, 
+        "y_pix": 427.11492500901716
+    }, 
+    {
+        "id": "KMHX", 
+        "latitude": 34.77611111111111, 
+        "longitude": -76.87611389160156, 
+        "metar": "KNKT", 
+        "name": "Morehead City, NC", 
+        "x_pix": 700.13329599122767, 
+        "y_pix": 208.57251062858077
+    }, 
+    {
+        "id": "KMKX", 
+        "latitude": 42.967777777777776, 
+        "longitude": -88.55055236816406, 
+        "metar": "KRYV", 
+        "name": "Milwaukee, WI", 
+        "x_pix": 511.17328862539983, 
+        "y_pix": 330.99922497355408
+    }, 
+    {
+        "id": "KMLB", 
+        "latitude": 28.113333333333333, 
+        "longitude": -80.65416717529297, 
+        "metar": "KMLB", 
+        "name": "Melbourne, FL", 
+        "x_pix": 666.95555839849453, 
+        "y_pix": 74.214493288017181
+    }, 
+    {
+        "id": "KMOB", 
+        "latitude": 30.679444444444446, 
+        "longitude": -88.2397232055664, 
+        "metar": "KMOB", 
+        "name": "Mobile, AL", 
+        "x_pix": 538.35798545914236, 
+        "y_pix": 104.14248476719558
+    }, 
+    {
+        "id": "KMPX", 
+        "latitude": 44.848888888888894, 
+        "longitude": -93.5655517578125, 
+        "metar": "KFCM", 
+        "name": "Minneapolis, MN", 
+        "x_pix": 442.29483675666341, 
+        "y_pix": 361.14624832451415
+    }, 
+    {
+        "id": "KMQT", 
+        "latitude": 46.53111111111111, 
+        "longitude": -87.54833221435547, 
+        "metar": "KSAW", 
+        "name": "Marquette, MI", 
+        "x_pix": 517.41117294715195, 
+        "y_pix": 398.4365171950318
+    }, 
+    {
+        "id": "KMRX", 
+        "latitude": 36.16861111111111, 
+        "longitude": -83.40166473388672, 
+        "metar": "KMOR", 
+        "name": "Knoxville/Morristown, TN", 
+        "x_pix": 599.27380217037978, 
+        "y_pix": 215.21341353478755
+    }, 
+    {
+        "id": "KMSX", 
+        "latitude": 47.04111111111111, 
+        "longitude": -113.98611450195312, 
+        "metar": "KMSO", 
+        "name": "Missoula, MT", 
+        "x_pix": 183.52301481914927, 
+        "y_pix": 420.01305727124293
+    }, 
+    {
+        "id": "KMTX", 
+        "latitude": 41.26277777777778, 
+        "longitude": -112.4477767944336, 
+        "metar": "KOGD", 
+        "name": "Salt Lake City, UT", 
+        "x_pix": 185.22604874447273, 
+        "y_pix": 310.45803612201559
+    }, 
+    {
+        "id": "KMUX", 
+        "latitude": 37.155277777777776, 
+        "longitude": -121.89833068847656, 
+        "metar": "KRHV", 
+        "name": "San Francisco, CA", 
+        "x_pix": 37.748036027120932, 
+        "y_pix": 265.30753837553772
+    }, 
+    {
+        "id": "KMVX", 
+        "latitude": 47.52777777777778, 
+        "longitude": -97.32555389404297, 
+        "metar": "KRDR", 
+        "name": "Grand Forks, ND", 
+        "x_pix": 393.00035523288466, 
+        "y_pix": 410.10113750259325
+    }, 
+    {
+        "id": "KMXX", 
+        "latitude": 32.53666666666666, 
+        "longitude": -85.78971862792969, 
+        "metar": "KAUO", 
+        "name": "Maxwell AFB, AL", 
+        "x_pix": 572.78107086873968, 
+        "y_pix": 143.12500275482668
+    }, 
+    {
+        "id": "KNKX", 
+        "latitude": 32.91888888888889, 
+        "longitude": -117.04194641113281, 
+        "metar": "KNKX", 
+        "name": "San Diego, CA", 
+        "x_pix": 90.151589679129842, 
+        "y_pix": 171.16593955514989
+    }, 
+    {
+        "id": "KNQA", 
+        "latitude": 35.344722222222224, 
+        "longitude": -89.87333679199219, 
+        "metar": "KNQA", 
+        "name": "Memphis, TN", 
+        "x_pix": 505.17329806085615, 
+        "y_pix": 188.39983009810297
+    }, 
+    {
+        "id": "KOAX", 
+        "latitude": 41.32027777777778, 
+        "longitude": -96.36666870117188, 
+        "metar": "KFET", 
+        "name": "Omaha, NE", 
+        "x_pix": 406.45655324319199, 
+        "y_pix": 294.51442212087608
+    }, 
+    {
+        "id": "KOHX", 
+        "latitude": 36.24722222222222, 
+        "longitude": -86.5625, 
+        "metar": "KBNA", 
+        "name": "Nashville, TN", 
+        "x_pix": 552.62213430233749, 
+        "y_pix": 210.15737378380112
+    }, 
+    {
+        "id": "KOKX", 
+        "latitude": 40.86555555555556, 
+        "longitude": -72.8638916015625, 
+        "metar": "KHWV", 
+        "name": "New York City/Upton, NY", 
+        "x_pix": 728.98183927105231, 
+        "y_pix": 332.54323201853168
+    }, 
+    {
+        "id": "KOTX", 
+        "latitude": 47.680277777777775, 
+        "longitude": -117.62666320800781, 
+        "metar": "KSKA", 
+        "name": "Spokane, WA", 
+        "x_pix": 141.03702535824959, 
+        "y_pix": 440.99978368811003
+    }, 
+    {
+        "id": "KPAH", 
+        "latitude": 37.068333333333335, 
+        "longitude": -88.77194213867188, 
+        "metar": "KPAH", 
+        "name": "Paducah, KY", 
+        "x_pix": 518.60143512469813, 
+        "y_pix": 221.75437780033744
+    }, 
+    {
+        "id": "KPBZ", 
+        "latitude": 40.531666666666666, 
+        "longitude": -80.21805572509766, 
+        "metar": "KPIT", 
+        "name": "Pittsburgh, PA", 
+        "x_pix": 630.67977607435705, 
+        "y_pix": 302.88182479402712
+    }, 
+    {
+        "id": "KPDT", 
+        "latitude": 45.690555555555555, 
+        "longitude": -118.85277557373047, 
+        "metar": "KPDT", 
+        "name": "Pendleton, OR", 
+        "x_pix": 117.50700872746974, 
+        "y_pix": 408.28972223133894
+    }, 
+    {
+        "id": "KPOE", 
+        "latitude": 31.155555555555555, 
+        "longitude": -92.975830078125, 
+        "metar": "KBKB", 
+        "name": "Ft. Polk, LA", 
+        "x_pix": 462.55231233922149, 
+        "y_pix": 107.26522194482544
+    }, 
+    {
+        "id": "KPUX", 
+        "latitude": 38.45944444444445, 
+        "longitude": -104.18138885498047, 
+        "metar": "KABH", 
+        "name": "Pueblo, CO", 
+        "x_pix": 294.80364705971306, 
+        "y_pix": 244.92164101187754
+    }, 
+    {
+        "id": "KRAX", 
+        "latitude": 35.66555555555556, 
+        "longitude": -78.4897232055664, 
+        "metar": "KJNX", 
+        "name": "Raleigh/Durham, NC", 
+        "x_pix": 672.9014815547705, 
+        "y_pix": 219.41050086643543
+    }, 
+    {
+        "id": "KRGX", 
+        "latitude": 39.75416666666667, 
+        "longitude": -119.46221923828125, 
+        "metar": "KRNO", 
+        "name": "Reno, NV", 
+        "x_pix": 83.697287625613356, 
+        "y_pix": 303.01609399928583
+    }, 
+    {
+        "id": "KRIW", 
+        "latitude": 43.066111111111105, 
+        "longitude": -108.47721862792969, 
+        "metar": "KRIW", 
+        "name": "Riverton, WY", 
+        "x_pix": 243.51823607874093, 
+        "y_pix": 335.83115398012245
+    }, 
+    {
+        "id": "KRLX", 
+        "latitude": 38.31111111111111, 
+        "longitude": -81.72305297851562, 
+        "metar": "KCRW", 
+        "name": "Charleston, WV", 
+        "x_pix": 617.05674356586223, 
+        "y_pix": 258.48387504785478
+    }, 
+    {
+        "id": "KRTX", 
+        "latitude": 45.71472222222223, 
+        "longitude": -122.96527862548828, 
+        "metar": "KSPB", 
+        "name": "Portland, OR", 
+        "x_pix": 66.262263352472317, 
+        "y_pix": 422.38624696615767
+    }, 
+    {
+        "id": "KSFX", 
+        "latitude": 43.10583333333334, 
+        "longitude": -112.68611145019531, 
+        "metar": "KPIH", 
+        "name": "Pocatello, ID", 
+        "x_pix": 187.61730178010006, 
+        "y_pix": 344.75801102846447
+    }, 
+    {
+        "id": "KSGF", 
+        "latitude": 37.23527777777778, 
+        "longitude": -93.40055847167969, 
+        "metar": "KSGF", 
+        "name": "Springfield, MO", 
+        "x_pix": 450.76659111893213, 
+        "y_pix": 220.01684764811199
+    }, 
+    {
+        "id": "KSHV", 
+        "latitude": 32.450833333333335, 
+        "longitude": -93.84139251708984, 
+        "metar": "KSHV", 
+        "name": "Shreveport, LA", 
+        "x_pix": 447.87028705045918, 
+        "y_pix": 130.82948729340066
+    }, 
+    {
+        "id": "KSJT", 
+        "latitude": 31.37138888888889, 
+        "longitude": -100.49250030517578, 
+        "metar": "KSJT", 
+        "name": "San Angelo, TX", 
+        "x_pix": 343.48057732097851, 
+        "y_pix": 110.28727691860749
+    }, 
+    {
+        "id": "KSOX", 
+        "latitude": 33.81777777777778, 
+        "longitude": -117.63583374023438, 
+        "metar": "KAJO", 
+        "name": "Santa Ana Mountains, CA", 
+        "x_pix": 84.807996656583128, 
+        "y_pix": 189.51930811989038
+    }, 
+    {
+        "id": "KSRX", 
+        "latitude": 35.29055555555556, 
+        "longitude": -94.36166381835938, 
+        "metar": "KFSM", 
+        "name": "Ft. Smith, AR", 
+        "x_pix": 437.95160709792418, 
+        "y_pix": 183.36735314245126
+    }, 
+    {
+        "id": "KTBW", 
+        "latitude": 27.705555555555556, 
+        "longitude": -82.40166473388672, 
+        "metar": "KMCF", 
+        "name": "Tampa Bay, FL", 
+        "x_pix": 639.85081843670491, 
+        "y_pix": 61.534048122011804
+    }, 
+    {
+        "id": "KTFX", 
+        "latitude": 47.459722222222226, 
+        "longitude": -111.3852767944336, 
+        "metar": "KGTF", 
+        "name": "Great Falls, MT", 
+        "x_pix": 217.12840130759992, 
+        "y_pix": 422.24534203750511
+    }, 
+    {
+        "id": "KTLH", 
+        "latitude": 30.3975, 
+        "longitude": -84.32888793945312, 
+        "metar": "KTLH", 
+        "name": "Tallahassee, FL", 
+        "x_pix": 601.05445021050252, 
+        "y_pix": 106.67076279716116
+    }, 
+    {
+        "id": "KTLX", 
+        "latitude": 35.33305555555556, 
+        "longitude": -97.27777862548828, 
+        "metar": "KTIK", 
+        "name": "Oklahoma City, OK", 
+        "x_pix": 394.14883751299953, 
+        "y_pix": 183.33936124816717
+    }, 
+    {
+        "id": "KTWX", 
+        "latitude": 38.996944444444445, 
+        "longitude": -96.23249816894531, 
+        "metar": "KMHK", 
+        "name": "Topeka, KS", 
+        "x_pix": 408.90378820242984, 
+        "y_pix": 251.45119082078983
+    }, 
+    {
+        "id": "KTYX", 
+        "latitude": 43.755833333333335, 
+        "longitude": -75.68000030517578, 
+        "metar": "KGTB", 
+        "name": "Montague/Ft. Drum, NY", 
+        "x_pix": 678.47631109430995, 
+        "y_pix": 374.70119982972631
+    }, 
+    {
+        "id": "KUDX", 
+        "latitude": 44.125, 
+        "longitude": -102.82971954345703, 
+        "metar": "KRAP", 
+        "name": "Rapid City, SD", 
+        "x_pix": 320.30766846551654, 
+        "y_pix": 348.62419650854167
+    }, 
+    {
+        "id": "KUEX", 
+        "latitude": 40.32083333333334, 
+        "longitude": -98.44194793701172, 
+        "metar": "KHSI", 
+        "name": "Hastings, NE", 
+        "x_pix": 377.61924691884082, 
+        "y_pix": 275.94346998790996
+    }, 
+    {
+        "id": "KVAX", 
+        "latitude": 30.8904, 
+        "longitude": -83.0018, 
+        "metar": "KVAD", 
+        "name": "Moody AFB, GA", 
+        "x_pix": 620.61293459272986, 
+        "y_pix": 119.0444207679725
+    }, 
+    {
+        "id": "KVBX", 
+        "latitude": 34.838055555555556, 
+        "longitude": -120.39694213867188, 
+        "metar": "KSMX", 
+        "name": "Vandenberg AFB, CA", 
+        "x_pix": 48.371337470227679, 
+        "y_pix": 217.92149145414334
+    }, 
+    {
+        "id": "KVNX", 
+        "latitude": 36.740833333333335, 
+        "longitude": -98.12777709960938, 
+        "metar": "KEND", 
+        "name": "Vance AFB, OK", 
+        "x_pix": 381.56515071493953, 
+        "y_pix": 209.50899373558059
+    }, 
+    {
+        "id": "KVTX", 
+        "latitude": 34.41166666666666, 
+        "longitude": -119.179443359375, 
+        "metar": "KCMA", 
+        "name": "Los Angeles, CA", 
+        "x_pix": 64.367160688653058, 
+        "y_pix": 205.70475069322984
+    }, 
+    {
+        "id": "KVWX", 
+        "latitude": 38.2603, 
+        "longitude": -87.7245, 
+        "metar": "KEVV", 
+        "name": "Evansville, IN", 
+        "x_pix": 531.53012467239091, 
+        "y_pix": 245.31233558299436
+    }, 
+    {
+        "id": "KYUX", 
+        "latitude": 32.49539, 
+        "longitude": -114.65646, 
+        "metar": "KNYL", 
+        "name": "Yuma, AZ", 
+        "x_pix": 124.91667624087559, 
+        "y_pix": 155.91735320246252
+    }
+]
