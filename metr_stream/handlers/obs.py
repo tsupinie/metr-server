@@ -11,15 +11,18 @@ import json
 import urllib.request as urlreq
 import os
 import warnings
+from collections import defaultdict
+from math import exp, log
 
 from metr_stream.handlers.handler import DataHandler
 from metr_stream.utils.download import download
+from metr_stream.utils.static import get_static
 from metr_stream.utils.obs.mdf import MDF
 
 def _cache_fname(source, dt):
     return f"data/sfc/{source}_{dt.strftime('%Y%m%d%H')}.json"
 
-def _parse_mdf(mdf_txt):
+def _parse_metar_mdf(mdf_txt):
     mdf = MDF.from_string(mdf_txt)
 
     obs = []
@@ -39,16 +42,46 @@ def _parse_mdf(mdf_txt):
 
     return obs
 
+def _parse_meso_mdf(mdf_txt):
+    static = get_static('okmesonet.json')
+
+    obs = _parse_metar_mdf(mdf_txt)
+    for ob in obs:
+        relh = float(ob['RELH']) / 100
+        tair = float(ob['TAIR']) + 273.15
+        sat_vapr = 611 * exp(2.5e6 / 461.5 * (1 / 273.15 - 1 / tair))
+        tdew = 1. / (1. / 273.15 - 461.5 / 2.5e6 * log((sat_vapr * relh) / 611))
+        ob['TDEW'] = tdew - 273.15
+
+        ob['PALT'] = ob['PRES'] # Set PMSL to be the station presssure for now
+
+        ob['LAT'] = float(static[ob['STID'].decode('utf-8')]['LAT'])
+        ob['LON'] = float(static[ob['STID'].decode('utf-8')]['LON'])
+    return obs
+
+
+class ObsNetworkConfig(object):
+    def __init__(self, url_fmt, parser):
+        self.url_fmt = url_fmt
+        self.parser = parser
+
+_configs = {
+    'metar': [
+        ObsNetworkConfig(
+            "http://www.mesonet.org/data/public/noaa/metar/archive/mdf/conus/%Y/%m/%d/%Y%m%d%H%M.mdf",
+            _parse_metar_mdf,
+        )
+    ],
+    'mesonet': [
+        ObsNetworkConfig(
+            "http://www.mesonet.org/data/public/mesonet/mdf/%Y/%m/%d/%Y%m%d%H%M.mdf",
+            _parse_meso_mdf,
+        )
+    ]
+}
+
 
 class ObsHandler(DataHandler):
-    _url_formats = {
-        'metar':"http://www.mesonet.org/data/public/noaa/metar/archive/mdf/conus/%Y/%m/%d/%Y%m%d%H%M.mdf",
-    }
-
-    _parsers = {
-        'metar':_parse_mdf,
-    }
-
     def __init__(self, source):
         self._source = source
 
@@ -65,11 +98,14 @@ class ObsHandler(DataHandler):
 
         obs_json = self._load_cache(sfc_hr)
         if obs_json is None:
-            url_fmt = ObsHandler._url_formats[self._source]
-            url = sfc_hr.strftime(url_fmt)
+            obs = []
+            for config in _configs[self._source]:
+                url = sfc_hr.strftime(config.url_fmt)
 
-            txt = (await download(url)).decode('utf-8')
-            obs = ObsHandler._parsers[self._source](txt)
+                txt = (await download(url)).decode('utf-8')
+                network_obs = config.parser(txt)
+
+                obs.extend(network_obs)
 
             params = ['STID', 'LAT', 'LON', 'TIME', 'PALT', 'TAIR', 'TDEW', 'WDIR', 'WSPD']
             obs_str = b"".join(pack_ob(params, ob) for ob in obs)
