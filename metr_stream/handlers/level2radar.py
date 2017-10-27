@@ -23,6 +23,7 @@ import re
 
 from metr_stream.handlers.handler import DataHandler
 from metr_stream.utils.download import download
+from metr_stream.utils.static import get_static
 
 
 _url_base = "http://mesonet-nexrad.agron.iastate.edu/level2/raw"
@@ -33,7 +34,7 @@ _remote_tz = pytz.timezone('America/Chicago')
 def radar_info():
     global _wsr_88ds
     if _wsr_88ds is None:
-        _wsr_88ds = json.loads(open('data/wsr88ds.json', 'rb').read())
+        _wsr_88ds = get_static('wsr88ds.json')
 
     return _wsr_88ds
 
