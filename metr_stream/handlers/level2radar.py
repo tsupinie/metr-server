@@ -83,6 +83,12 @@ class Level2Handler(DataHandler):
         self._elev = elev
         self._radar_vols = []
 
+        self.data_check_intv = 60
+
+        int_deg = int(np.floor(self._elev))
+        frc_deg = int((self._elev - int_deg) * 10)
+        self.id = f"level2radar.{self._site}.{self._field}.{int_deg:02d}p{frc_deg:1d}"
+
     async def fetch(self):
         dts = await check_recent_site(self._site)
         dts.sort(reverse=True)
@@ -117,9 +123,7 @@ class Level2Handler(DataHandler):
 
             idt += 1
 
-        int_deg = int(np.floor(self._elev))
-        frc_deg = int((self._elev - int_deg) * 10)
-        sweep['handler'] = f"level2radar.{self._site}.{self._field}.{int_deg:02d}p{frc_deg:1d}"
+        sweep['handler'] = self.id
         return sweep
        
     def post_fetch(self):

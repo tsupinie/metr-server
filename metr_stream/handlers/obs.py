@@ -48,6 +48,7 @@ def _parse_metar_mdf(mdf_txt):
 
     return obs
 
+
 def _parse_meso_mdf(mdf_txt):
     static = get_static('okmesonet.json')
 
@@ -102,7 +103,11 @@ _configs = {
 class ObsHandler(DataHandler):
     def __init__(self, source):
         self._source = source
+        self._obs = None
         self._cache = Cache(_cache_fname(self._source))
+
+        self.data_check_intv = 300
+        self.id = f"obs.{self._source}"
 
     async def fetch(self):
         def pack_ob(param_order, ob):
@@ -150,7 +155,7 @@ class ObsHandler(DataHandler):
             base64_data = base64.encodebytes(zlib.compress(obs_str)).decode('ascii')
             obs_json = {'source':'METAR', 'params':params, 'data':"".join(base64_data.split("\n"))}
             obs_json['nominal_time'] = obs_dt.strftime("%Y%m%d_%H%M")
-            obs_json['handler'] = f"obs.{self._source}"
+            obs_json['handler'] = self.id
 
         self._obs = obs_json
 
