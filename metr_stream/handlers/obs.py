@@ -19,9 +19,14 @@ from metr_stream.utils.download import download
 from metr_stream.utils.static import get_static
 from metr_stream.utils.errors import StaleDataError
 from metr_stream.utils.obs.mdf import MDF
+from metr_stream.utils.cache import Cache
 
-def _cache_fname(source, dt):
-    return f"data/sfc/{source}_{dt.strftime('%Y%m%d%H')}.json"
+
+def _cache_fname(source):
+    def fname(dt):
+        return f"data/sfc/{source}_{dt.strftime('%Y%m%d%H%M')}.json"
+    return fname
+
 
 def _parse_metar_mdf(mdf_txt):
     mdf = MDF.from_string(mdf_txt)
@@ -97,6 +102,7 @@ _configs = {
 class ObsHandler(DataHandler):
     def __init__(self, source):
         self._source = source
+        self._cache = Cache(_cache_fname(self._source))
 
     async def fetch(self):
         def pack_ob(param_order, ob):
@@ -105,7 +111,7 @@ class ObsHandler(DataHandler):
 
         obs_dt = max(cfg.get_time() for cfg in _configs[self._source])
 
-        obs_json = self._load_cache(sfc_hr)
+        obs_json = self._cache.load_cache(obs_dt)
         if obs_json is None:
             obs = []
             obs_dts = []
@@ -151,17 +157,8 @@ class ObsHandler(DataHandler):
         return obs_json
 
     def post_fetch(self):
-        json_str = json.dumps(self._obs).encode('utf-8')
+        if self._obs is None:
+            return
+
         dt = datetime.strptime(self._obs['nominal_time'], '%Y%m%d_%H%M')
-        cache_fname = _cache_fname(self._source, dt)
-        open(cache_fname, 'wb').write(json_str)
-
-    def _load_cache(self, dt):
-        cache_fname = _cache_fname(self._source, dt)
-        if not os.path.exists(cache_fname):
-            return None
-
-        json_str = json.loads(open(cache_fname, 'rb').read().decode('utf-8'))
-        return json_str
-
-
+        self._cache.cache(self._obs, dt)
