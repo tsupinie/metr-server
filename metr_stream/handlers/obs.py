@@ -12,11 +12,12 @@ import urllib.request as urlreq
 import os
 import warnings
 from collections import defaultdict
-from math import exp, log
+from math import exp, log, floor
 
 from metr_stream.handlers.handler import DataHandler
 from metr_stream.utils.download import download
 from metr_stream.utils.static import get_static
+from metr_stream.utils.errors import StaleDataError
 from metr_stream.utils.obs.mdf import MDF
 
 def _cache_fname(source, dt):
@@ -61,21 +62,33 @@ def _parse_meso_mdf(mdf_txt):
 
 
 class ObsNetworkConfig(object):
-    def __init__(self, url_fmt, parser):
+    def __init__(self, url_fmt, parser, cycle, delay, stale):
         self.url_fmt = url_fmt
         self.parser = parser
+        self._cycle = cycle
+        self._delay = delay
+        self._stale = stale
+
+    def get_time(self, dcycle=0):
+        now = (datetime.utcnow() - timedelta(seconds=self._delay)).timestamp()
+        recent = floor(now / self._cycle) * self._cycle
+        obs_dt = datetime.fromtimestamp(recent) - timedelta(seconds=(dcycle * self._cycle))
+        if (datetime.utcnow() - obs_dt).total_seconds() > self._stale:
+            raise StaleDataError('')
+        return obs_dt
+
 
 _configs = {
     'metar': [
         ObsNetworkConfig(
             "http://www.mesonet.org/data/public/noaa/metar/archive/mdf/conus/%Y/%m/%d/%Y%m%d%H%M.mdf",
-            _parse_metar_mdf,
+            _parse_metar_mdf, 3600, 600, 7200
         )
     ],
     'mesonet': [
         ObsNetworkConfig(
             "http://www.mesonet.org/data/public/mesonet/mdf/%Y/%m/%d/%Y%m%d%H%M.mdf",
-            _parse_meso_mdf,
+            _parse_meso_mdf, 300, 360, 1200
         )
     ]
 }
@@ -90,29 +103,47 @@ class ObsHandler(DataHandler):
             pack_fmt = '5sff13sfffff'
             return struct.pack(pack_fmt, *[ob[p] for p in param_order])
 
-        now = datetime.utcnow()
-        sfc_hr = now.replace(minute=10, second=0, microsecond=0)
-        if sfc_hr > now:
-            sfc_hr -= timedelta(hours=1) 
-        sfc_hr = sfc_hr.replace(minute=0)
+        obs_dt = max(cfg.get_time() for cfg in _configs[self._source])
 
         obs_json = self._load_cache(sfc_hr)
         if obs_json is None:
             obs = []
+            obs_dts = []
             for config in _configs[self._source]:
-                url = sfc_hr.strftime(config.url_fmt)
+                network_obs = None
+                network_error = False
+                dcycle = 0
+                while network_obs is None:
+                    try:
+                        cfg_dt = config.get_time(dcycle=dcycle)
+                    except StaleDataError:
+                        network_error = True
+                        break
 
-                txt = (await download(url)).decode('utf-8')
-                network_obs = config.parser(txt)
+                    url = cfg_dt.strftime(config.url_fmt)
 
-                obs.extend(network_obs)
+                    txt = (await download(url)).decode('utf-8')
+                    try:
+                        network_obs = config.parser(txt)
+                    except:
+                        dcycle += 1
+
+                if not network_error:
+                    obs.extend(network_obs)
+                    obs_dts.append(cfg_dt)
+
+            if len(obs) == 0:
+                self._obs = None
+                raise StaleDataError(f"obs.{self._source}")
+
+            obs_dt = max(obs_dts)
 
             params = ['STID', 'LAT', 'LON', 'TIME', 'PALT', 'TAIR', 'TDEW', 'WDIR', 'WSPD']
             obs_str = b"".join(pack_ob(params, ob) for ob in obs)
 
             base64_data = base64.encodebytes(zlib.compress(obs_str)).decode('ascii')
             obs_json = {'source':'METAR', 'params':params, 'data':"".join(base64_data.split("\n"))}
-            obs_json['nominal_time'] = sfc_hr.replace(minute=0).strftime("%Y%m%d_%H%M")
+            obs_json['nominal_time'] = obs_dt.strftime("%Y%m%d_%H%M")
             obs_json['handler'] = f"obs.{self._source}"
 
         self._obs = obs_json
