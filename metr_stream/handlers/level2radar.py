@@ -93,8 +93,14 @@ class Level2Handler(DataHandler):
         while sweep is None:
             fetch_dt = dts[idt]
             sweep = self._load_cache(self._site, self._field, self._elev, fetch_dt)
-            if sweep is None:
+            if sweep is not None:
+                break
+
+            try:
                 rv = await RadarVolume.fetch(self._site, fetch_dt)
+            except ValueError:
+                pass
+            else:
                 sweep_obj = rv.get_sweep(self._field, self._elev)
                 self._radar_vols.append(rv)
 
@@ -107,7 +113,7 @@ class Level2Handler(DataHandler):
                     if not sweep_obj.is_complete():
                         dazim = round(sweep_obj._dazim, 1)
                         _logger.info(f"Rejecting volume: sweep incomplete (dazim = {dazim}, n_rays = {sweep_obj._data.shape[0]})")
-                        sweep_obj = None
+                        sweep = None
 
             idt += 1
 
