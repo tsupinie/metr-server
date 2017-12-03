@@ -3,11 +3,13 @@ def get_data_handler(name):
     from .level2radar import Level2Handler
     from .shapefile import ShapefileHandler
     from .obs import ObsHandler
+    from .static import StaticHandler
 
     handler_dict = {
         'level2radar': Level2Handler,
         'shapefile': ShapefileHandler,
         'obs': ObsHandler,
+        'gui': StaticHandler,
     }
 
     return handler_dict[name]
