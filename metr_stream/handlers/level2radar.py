@@ -24,7 +24,7 @@ import re
 from metr_stream.handlers.handler import DataHandler
 from metr_stream.utils.download import download
 from metr_stream.utils.static import get_static
-
+from metr_stream.utils.cache import Cache
 
 _url_base = "http://mesonet-nexrad.agron.iastate.edu/level2/raw"
 _wsr_88ds = None
@@ -69,8 +69,9 @@ async def check_recent_site(site):
     return [ dt for dt in recent if dt is not None ]    
 
 
-def _cache_fname(cache_dir, site, field, elev, dt):
-    fname = f"{cache_dir}/{site}_{field}_{elev:04.1f}_{dt.strftime('%Y%m%d_%H%M')}.json"
+def _cache_fname(cache_dir, site, field, elev):
+    def fname(dt):
+        return f"{cache_dir}/{site}_{field}_{elev:04.1f}_{dt.strftime('%Y%m%d_%H%M')}.json"
     return fname
 
 
@@ -90,6 +91,8 @@ class Level2Handler(DataHandler):
         self.id = f"level2radar.{self._site}.{self._field}.{int_deg:02d}p{frc_deg:1d}"
 
     async def fetch(self):
+        self._radar_vols = [ rv for rv in self._radar_vols if rv.timestamp > (datetime.now() - timedelta(hours=2)) ]
+
         dts = await check_recent_site(self._site)
         dts.sort(reverse=True)
 
@@ -98,7 +101,7 @@ class Level2Handler(DataHandler):
 
         while sweep is None:
             fetch_dt = dts[idt]
-            sweep = self._load_cache(self._site, self._field, self._elev, fetch_dt)
+            sweep = self._load_cache(fetch_dt)
             if sweep is not None:
                 break
 
@@ -127,17 +130,19 @@ class Level2Handler(DataHandler):
         return sweep
        
     def post_fetch(self):
+        self._cache()
+
+    def _cache(self):
         for rv in self._radar_vols:
-            rv.cache(cache_dir=Level2Handler._cache_dir)
+            rv.cache()
 
-    def _load_cache(self, site, field, elev, dt):
-        cache_name = _cache_fname(Level2Handler._cache_dir, site, field, elev, dt)
-        if os.path.exists(cache_name):
-            sweep_str = open(cache_name, 'rb').read().decode('utf-8')
-            sweep = json.loads(sweep_str)
-        else:
+    def _load_cache(self, dt):
+        try:
+            vol = [ rv for rv in self._radar_vols if rv.timestamp == dt ][0]
+        except IndexError:
             sweep = None
-
+        else:
+            sweep = vol.load_cache(self._field, self._elev)
         return sweep
 
 
@@ -154,10 +159,18 @@ class RadarVolume(object):
                 sweep = swp
         return sweep
 
-    def cache(self, cache_dir='.'):
+    def cache(self):
         for swp in self._sweeps:
             if swp.is_complete() and swp.has_data():
-                swp.cache(cache_dir=cache_dir)
+                swp.cache()
+
+    def load_cache(self, field, elev):
+        sweep = self.get_sweep(field, elev)
+        return sweep.load_cache()
+
+    @property
+    def timestamp(self):
+        return min(swp.timestamp for swp in self._sweeps)
 
     @classmethod
     async def fetch(cls, site, dt, local=False):
@@ -208,6 +221,9 @@ class RadarSweep(object):
         self._drng = drng
         self._data = data
 
+        field_str = RadarSweep._cache_fields[self.field]
+        self._cache = Cache(_cache_fname(Level2Handler._cache_dir, self.site, self.field, self.elevation))
+
     def is_complete(self):
         n_rays = self._data.shape[0]
         return (self._dazim == 0.5 and n_rays == 720) or (self._dazim == 1.0 and n_rays == 360)
@@ -240,13 +256,12 @@ class RadarSweep(object):
         rs_json['data'] = "".join(base64_data.split("\n"))
         return rs_json
         
-    def cache(self, cache_dir='.'):
-        rs_json = self.to_json()
+    def cache(self):
+        if not self._cache.is_cached(self.timestamp):
+            self._cache.cache(self.to_json(), self.timestamp)
 
-        field_str = RadarSweep._cache_fields[self.field]
-        fname = _cache_fname(cache_dir, self.site, field_str, self.elevation, self.timestamp)
-        with open(fname, 'wb') as fcache:
-            fcache.write(json.dumps(rs_json).encode('utf-8'))
+    def load_cache(self):
+        return self._cache.load_cache(self.timestamp)
 
 if __name__ == "__main__":
     check_recent()
