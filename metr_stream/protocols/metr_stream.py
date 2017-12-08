@@ -71,7 +71,11 @@ class MetrStreamProtocol(WebSocketServerProtocol):
             self._logger.error(f"Stale data in {exc.handler}")
             req_data = {'handler': exc.handler, 'error':'stale data'}
             success = False
-   
+        except Exception as exc:
+            self._logger.error(f"Error in {handler.id}: {exc}")
+            req_data = {'handler': handler.id, 'error':'internal server error'}
+            success = False   
+
         data_json = json.dumps(req_data).encode('utf-8')
         self.sendMessage(data_json, is_binary)
 
