@@ -150,19 +150,19 @@ class RadarVolume(object):
         for swp in self._sweeps:
             swp_field = RadarSweep._cache_fields[swp.field]
             swp_elev = round(swp.elevation, 1)
-            if field == swp_field and elev == swp_elev:
+            if field == swp_field and elev == swp_elev and swp.has_data():
                 sweep = swp
         return sweep
 
     def cache(self, cache_dir='.'):
         for swp in self._sweeps:
-            if swp.is_complete():
+            if swp.is_complete() and swp.has_data():
                 swp.cache(cache_dir=cache_dir)
 
     @classmethod
     async def fetch(cls, site, dt, local=False):
         if local:
-            url = f"http://127.0.0.1:8000/data/l2raw/{site}{dt.strftime('%Y%m%d_%H%M')}_V06"
+            url = f"http://127.0.0.1:8000/data/l2raw/{site}{dt.strftime('%Y%m%d_%H%M%S')}_V06"
         else:
             url = f"{_url_base}/{site}/{site}_{dt.strftime('%Y%m%d_%H%M')}"
 
@@ -211,6 +211,9 @@ class RadarSweep(object):
     def is_complete(self):
         n_rays = self._data.shape[0]
         return (self._dazim == 0.5 and n_rays == 720) or (self._dazim == 1.0 and n_rays == 360)
+
+    def has_data(self):
+        return (~self._data.mask).sum() > 10
 
     def to_json(self):
         data_filled = list(np.ma.filled(self._data, -99.).ravel())
