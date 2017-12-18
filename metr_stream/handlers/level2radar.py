@@ -86,12 +86,15 @@ class Level2Handler(DataHandler):
 
         self.data_check_intv = 60
 
+        self._cache = Cache(_cache_fname(Level2Handler._cache_dir, self._site, self._field, self._elev),
+                            timeout=timedelta(minutes=15))
+
         int_deg = int(np.floor(self._elev))
         frc_deg = int((self._elev - int_deg) * 10)
         self.id = f"level2radar.{self._site}.{self._field}.{int_deg:02d}p{frc_deg:1d}"
 
     async def fetch(self):
-        self._radar_vols = [ rv for rv in self._radar_vols if rv.timestamp > (datetime.now() - timedelta(hours=2)) ]
+        self._radar_vols = [ rv for rv in self._radar_vols if rv.timestamp > (datetime.utcnow() - timedelta(hours=2)) ]
 
         dts = await check_recent_site(self._site)
         dts.sort(reverse=True)
@@ -111,7 +114,6 @@ class Level2Handler(DataHandler):
                 pass
             else:
                 sweep_obj = rv.get_sweep(self._field, self._elev)
-                self._radar_vols.append(rv)
 
                 try:
                     sweep = sweep_obj.to_json()
@@ -123,26 +125,24 @@ class Level2Handler(DataHandler):
                         dazim = round(sweep_obj._dazim, 1)
                         _logger.info(f"Rejecting volume: sweep incomplete (dazim = {dazim}, n_rays = {sweep_obj._data.shape[0]})")
                         sweep = None
+                    else:
+                        self._radar_vols.append(rv)
 
             idt += 1
 
+        _logger.debug(f"Number of radar volumes: {len(self._radar_vols)}")
         sweep['handler'] = self.id
         return sweep
        
     def post_fetch(self):
-        self._cache()
+        self._cache_volumes()
 
-    def _cache(self):
+    def _cache_volumes(self):
         for rv in self._radar_vols:
             rv.cache()
 
     def _load_cache(self, dt):
-        try:
-            vol = [ rv for rv in self._radar_vols if rv.timestamp == dt ][0]
-        except IndexError:
-            sweep = None
-        else:
-            sweep = vol.load_cache(self._field, self._elev)
+        sweep = self._cache.load_cache(dt)
         return sweep
 
 
@@ -164,10 +164,6 @@ class RadarVolume(object):
             if swp.is_complete() and swp.has_data():
                 swp.cache()
 
-    def load_cache(self, field, elev):
-        sweep = self.get_sweep(field, elev)
-        return sweep.load_cache()
-
     @property
     def timestamp(self):
         return min(swp.timestamp for swp in self._sweeps)
@@ -179,6 +175,7 @@ class RadarVolume(object):
         else:
             url = f"{_url_base}/{site}/{site}_{dt.strftime('%Y%m%d_%H%M')}"
 
+        _logger.debug(f"Downloading radar volume for {site} at {dt.strftime('%d %b %Y %H%M UTC')}")
         bio = BytesIO()
         bio.write(await download(url))
         bio.seek(0)
@@ -222,7 +219,7 @@ class RadarSweep(object):
         self._data = data
 
         field_str = RadarSweep._cache_fields[self.field]
-        self._cache = Cache(_cache_fname(Level2Handler._cache_dir, self.site, self.field, self.elevation))
+        self._cache = Cache(_cache_fname(Level2Handler._cache_dir, self.site, RadarSweep._cache_fields[self.field], self.elevation))
 
     def is_complete(self):
         n_rays = self._data.shape[0]
@@ -260,8 +257,7 @@ class RadarSweep(object):
         if not self._cache.is_cached(self.timestamp):
             self._cache.cache(self.to_json(), self.timestamp)
 
-    def load_cache(self):
-        return self._cache.load_cache(self.timestamp)
+        self._data = None
 
 if __name__ == "__main__":
     check_recent()
