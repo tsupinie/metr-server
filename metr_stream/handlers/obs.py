@@ -13,6 +13,10 @@ import os
 import warnings
 from collections import defaultdict
 from math import exp, log, floor
+import logging
+_logger = logging.getLogger(__name__)
+_logger.setLevel(logging.DEBUG)
+
 
 from metr_stream.handlers.handler import DataHandler
 from metr_stream.utils.download import download
@@ -68,11 +72,12 @@ def _parse_meso_mdf(mdf_txt):
 
 
 class ObsNetworkConfig(object):
-    def __init__(self, url_fmt, parser, cycle, delay, stale):
+    def __init__(self, url_fmt, parser, cycle, data_check_intv, delay, stale):
         self.url_fmt = url_fmt
         self.parser = parser
         self._cycle = cycle
         self._delay = delay
+        self._check_intv = data_check_intv
         self._stale = stale
 
     def get_time(self, dcycle=0):
@@ -83,18 +88,26 @@ class ObsNetworkConfig(object):
             raise StaleDataError('')
         return obs_dt
 
+    def get_expected(self):
+        now = datetime.utcnow().replace(tzinfo=pytz.utc)
+        recent = datetime.utcfromtimestamp(floor(now.timestamp() / self._check_intv) * self._check_intv)
+        expected = recent + timedelta(seconds=self._delay)
+        if expected > now.replace(tzinfo=None) + timedelta(seconds=self._check_intv):
+            expected -= timedelta(seconds=self._check_intv)
+        return expected
+
 
 _configs = {
     'metar': [
         ObsNetworkConfig(
             "http://www.mesonet.org/data/public/noaa/metar/archive/mdf/conus/%Y/%m/%d/%Y%m%d%H%M.mdf",
-            _parse_metar_mdf, 3600, 600, 7200
+            _parse_metar_mdf, 3600, 300, 600, 7200
         )
     ],
     'mesonet': [
         ObsNetworkConfig(
             "http://www.mesonet.org/data/public/mesonet/mdf/%Y/%m/%d/%Y%m%d%H%M.mdf",
-            _parse_meso_mdf, 300, 360, 1200
+            _parse_meso_mdf, 300, 300, 360, 1200
         )
     ]
 }
@@ -106,7 +119,6 @@ class ObsHandler(DataHandler):
         self._obs = None
         self._cache = Cache(_cache_fname(self._source))
 
-        self.data_check_intv = 300
         self.id = f"obs.{self._source}"
 
     async def fetch(self):
@@ -160,6 +172,12 @@ class ObsHandler(DataHandler):
         self._obs = obs_json
 
         return obs_json
+
+    def data_check_intv(self):
+        expected_times = [cfg.get_expected() for cfg in _configs[self._source]] 
+        next_time = (min(expected_times) - datetime.utcnow()).total_seconds()
+        _logger.debug(f"Requesting next check in {min(expected_times)} sec.")
+        return next_time
 
     def post_fetch(self):
         if self._obs is None:

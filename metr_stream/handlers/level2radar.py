@@ -84,8 +84,6 @@ class Level2Handler(DataHandler):
         self._elev = elev
         self._radar_vols = []
 
-        self.data_check_intv = 60
-
         self._cache = Cache(_cache_fname(Level2Handler._cache_dir, self._site, self._field, self._elev),
                             timeout=timedelta(minutes=15))
 
@@ -136,6 +134,9 @@ class Level2Handler(DataHandler):
        
     def post_fetch(self):
         self._cache_volumes()
+
+    def data_check_intv(self):
+        return 60
 
     def _cache_volumes(self):
         for rv in self._radar_vols:

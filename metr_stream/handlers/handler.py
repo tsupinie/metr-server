@@ -21,3 +21,6 @@ class DataHandler(object):
 
     def post_fetch(self):
         pass
+
+    def data_check_intv(self):
+        return 30 * 24 * 3600

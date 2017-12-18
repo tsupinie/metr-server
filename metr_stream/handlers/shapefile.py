@@ -8,7 +8,6 @@ class ShapefileHandler(DataHandler):
         self._domain = domain
         self._name = name
 
-        self.data_check_intv = 30 * 24 * 3600
         self.id = f"shapefile.{self._domain}.{self._name}"
 
     async def fetch(self):

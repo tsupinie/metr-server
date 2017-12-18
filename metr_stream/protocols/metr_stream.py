@@ -35,14 +35,6 @@ class MetrStreamProtocol(WebSocketServerProtocol):
                 handler_id = req_handler.id
                 self._logger.debug(f"Activating {handler_id} for {self._source}")
 
-                async def doFetch():
-                    await self.fetchData(req_handler, is_binary)
-
-                handler_timer = Timer(doFetch, req_handler.data_check_intv)
-                handler_timer.start()
-
-                self._active_timers[handler_id] = handler_timer
-
         elif req_action == 'deactivate':
             self._logger.debug(f"Deactivating {msg_json['handler']} for {self._source}")
             handler_timer = self._active_timers.pop(msg_json['handler'])
@@ -75,6 +67,13 @@ class MetrStreamProtocol(WebSocketServerProtocol):
             self._logger.error(f"Error in {handler.id}: {exc}")
             req_data = {'handler': handler.id, 'error':'internal server error'}
             success = False   
+
+        async def doFetch():
+            await self.fetchData(handler, is_binary)
+
+        handler_timer = Timer(doFetch, handler.data_check_intv(), single_shot=True)
+        handler_timer.start()
+        self._active_timers[handler.id] = handler_timer
 
         data_json = json.dumps(req_data).encode('utf-8')
         self.sendMessage(data_json, is_binary)
