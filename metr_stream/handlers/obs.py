@@ -17,7 +17,6 @@ import logging
 _logger = logging.getLogger(__name__)
 _logger.setLevel(logging.DEBUG)
 
-
 from metr_stream.handlers.handler import DataHandler
 from metr_stream.utils.download import download
 from metr_stream.utils.static import get_static
@@ -107,7 +106,7 @@ _configs = {
     'mesonet': [
         ObsNetworkConfig(
             "http://www.mesonet.org/data/public/mesonet/mdf/%Y/%m/%d/%Y%m%d%H%M.mdf",
-            _parse_meso_mdf, 300, 300, 360, 1200
+            _parse_meso_mdf, 300, 300, 420, 1200
         )
     ]
 }
@@ -176,8 +175,7 @@ class ObsHandler(DataHandler):
     def data_check_intv(self):
         expected_times = [cfg.get_expected() for cfg in _configs[self._source]] 
         next_time = (min(expected_times) - datetime.utcnow()).total_seconds()
-        _logger.debug(f"Requesting next check in {min(expected_times)} sec.")
-        return next_time
+        return next_time + 1
 
     def post_fetch(self):
         if self._obs is None:
