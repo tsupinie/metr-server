@@ -9,6 +9,7 @@ _logger.setLevel(logging.INFO)
 # Get PyART to shut up when you import it
 os.environ['PYART_QUIET'] = "1"
 from pyart.io import read_nexrad_archive
+from pyart.correct import dealias_unwrap_phase
 
 import pyproj
 
@@ -108,7 +109,7 @@ class Level2Handler(DataHandler):
 
             try:
                 rv = await RadarVolume.fetch(self._site, fetch_dt)
-            except ValueError:
+            except (ValueError, KeyError):
                 pass
             else:
                 sweep_obj = rv.get_sweep(self._field, self._elev)
@@ -182,6 +183,7 @@ class RadarVolume(object):
         bio.seek(0)
 
         rfile = read_nexrad_archive(bio)
+        rfile_dealias = dealias_unwrap_phase(rfile)
         dt = datetime.strptime(rfile.time['units'], 'seconds since %Y-%m-%dT%H:%M:%SZ')
 
         sweeps = []
@@ -196,8 +198,14 @@ class RadarVolume(object):
                 dazim = round((eaz - saz) / len(azimuths), 1)
 
                 dt_sweep = dt + timedelta(seconds=rfile.time['data'][istart])
+
+                if field == 'velocity':
+                    field_data = rfile_dealias['data'][istart:(iend + 1)]
+                else:
+                    field_data = rfile.get_field(ie, field)
+
                 rs = RadarSweep(site, dt_sweep, field, elv, 
-                                azimuths[0], float(ranges[0]), dazim, 250, rfile.get_field(ie, field))
+                                azimuths[0], float(ranges[0]), dazim, 250, field_data)
                 sweeps.append(rs)
         return cls(sweeps)
 
