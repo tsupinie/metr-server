@@ -109,8 +109,8 @@ class Level2Handler(DataHandler):
 
             try:
                 rv = await RadarVolume.fetch(self._site, fetch_dt)
-            except (ValueError, KeyError):
-                pass
+            except (ValueError, KeyError) as exc:
+                print(exc)
             else:
                 sweep_obj = rv.get_sweep(self._field, self._elev)
 
