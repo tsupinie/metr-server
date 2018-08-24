@@ -5,11 +5,10 @@ import signal
 import os
 from datetime import datetime, timedelta
 
-from autobahn.asyncio.websocket import WebSocketServerFactory
+from metr_stream.protocols.hollaback import HollaBackProtocol
+from metr_stream.protocols.metr_stream import MetrStreamProtocol
 
-from protocols.hollaback import HollaBackProtocol
-from protocols.metr_stream import MetrStreamProtocol
-
+from aiohttp import web
 
 class Cleaner(object):
     def __init__(self, interval, max_age, data_dir):
@@ -51,40 +50,19 @@ class Cleaner(object):
 
 
 def main():
-    port = 8001
+    host = "127.0.0.1"
+    port = 8002
     data_path = "data"
     logging.basicConfig(format="%(levelname)s|%(name)s|%(asctime)-15s: %(message)s")
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 
-    MetrStreamProtocol.data_path = data_path
+    protocol = HollaBackProtocol()
 
-    factory = WebSocketServerFactory()
-    factory.protocol = MetrStreamProtocol
-
-    loop = asyncio.get_event_loop()
-    coro = loop.create_server(factory, '127.0.0.1', port)
-    server = loop.run_until_complete(coro)
-
-    cleaner = Cleaner(300, 6 * 3600, data_path)
-    clnr = asyncio.ensure_future(cleaner.run_cleaner())
-
-    def staaahp(sig_num, stack_frame):
-        raise KeyboardInterrupt()
-
-    signal.signal(signal.SIGINT, staaahp)
-
-    try:
-        logger.info(f"Listening on port {port}")
-        loop.run_forever()
-    except KeyboardInterrupt:
-        print()
-    finally:
-        logger.info("Shutting down")
-
-        server.close()
-        loop.close()
-
+    app = web.Application()
+    app.add_routes([web.get('/', protocol)])
+    app.on_shutdown.append(type(protocol).on_shutdown)
+    web.run_app(app, host=host, port=port)
 
 if __name__ == "__main__":
     main()

@@ -1,25 +1,22 @@
 
 import logging
 
-from autobahn.asyncio.websocket import WebSocketServerProtocol
+from metr_stream.protocols.websocket import WebSocketProtocol
 
-
-class HollaBackProtocol(WebSocketServerProtocol):
+class HollaBackProtocol(WebSocketProtocol):
     def __init__(self, *args, **kwargs):
         super(HollaBackProtocol, self).__init__(*args, **kwargs)
 
         self._logger = logging.getLogger(__name__)
         self._logger.setLevel(logging.INFO)
 
-    def onConnect(self, request):
-        self._logger.info(f"Connection from {request.peer} accepted")
+    async def on_connect(self, request):
+        self._remote = request.remote
+        self._logger.info(f"Connection from {self._remote} accepted")
 
-    def onMessage(self, payload, isBinary):
+    async def on_message(self, payload):
         self._logger.info(f"Message received: {payload}")
-        self.sendMessage(payload, isBinary)
+        await self.send_message(payload)
 
-    def onClose(self, wasClean, code, reason):
-        if wasClean:
-            self._logger.info(f"Connection closed cleanly")
-        else:
-            self._logger.info(f"Connection terminated (reason: {reason})")
+    async def on_close(self):
+        self._logger.info(f"Connection from {self._remote} closed")
