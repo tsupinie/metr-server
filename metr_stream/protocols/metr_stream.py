@@ -10,15 +10,16 @@ from metr_stream.utils.timer import Timer
 
 
 class MetrStreamProtocol(WebSocketProtocol):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, data_path, *args, **kwargs):
         super(MetrStreamProtocol, self).__init__(*args, **kwargs)
 
         self._logger = logging.getLogger(__name__)
         self._logger.setLevel(logging.DEBUG)
         self._active_timers = {}
+        self._data_path = data_path
 
     async def on_connect(self, request):
-        self._source = request.peer
+        self._source = request.remote
         self._logger.info(f"Connection from {self._source} opened")
 
     async def on_message(self, payload):
@@ -43,7 +44,7 @@ class MetrStreamProtocol(WebSocketProtocol):
 
     async def send_message(self, payload, is_binary=False):
         self._logger.info(f"Sending {len(payload)} bytes to {self._source}")
-        super(MetrStreamProtocol, self).send_message(payload, is_binary=is_binary)
+        await super(MetrStreamProtocol, self).send_message(payload, is_binary=is_binary)
 
     async def on_close(self):
         for timer in self._active_timers.values():
@@ -71,8 +72,8 @@ class MetrStreamProtocol(WebSocketProtocol):
         handler_timer.start()
         self._active_timers[handler.id] = handler_timer
 
-        data_json = json.dumps(req_data).encode('utf-8')
-        self.send_message(data_json, is_binary=is_binary)
+        data_json = json.dumps(req_data)
+        await self.send_message(data_json, is_binary=is_binary)
 
         proc = multiprocessing.Process(target=handler.post_fetch)
         proc.start()

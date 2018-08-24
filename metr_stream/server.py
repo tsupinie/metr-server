@@ -51,17 +51,29 @@ class Cleaner(object):
 
 def main():
     host = "127.0.0.1"
-    port = 8002
+    port = 8001
     data_path = "data"
     logging.basicConfig(format="%(levelname)s|%(name)s|%(asctime)-15s: %(message)s")
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 
-    protocol = HollaBackProtocol()
+    protocol = MetrStreamProtocol(data_path)
 
+    cleaner = Cleaner(300, 2 * 3600, data_path)
+
+    async def start_cleaner(app):
+        app['cleaner'] = app.loop.create_task(cleaner.run_cleaner())
+
+    async def cleanup_cleaner(app):
+        app['cleaner'].cancel()
+        await app['cleaner']
+    
     app = web.Application()
     app.add_routes([web.get('/', protocol)])
+
     app.on_shutdown.append(type(protocol).on_shutdown)
+    app.on_startup.append(start_cleaner)
+
     web.run_app(app, host=host, port=port)
 
 if __name__ == "__main__":
