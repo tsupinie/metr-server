@@ -25,9 +25,9 @@ from metr_stream.utils.obs.mdf import MDF
 from metr_stream.utils.cache import Cache
 
 
-def _cache_fname(source):
+def _cache_fname(source, network):
     def fname(dt):
-        return f"data/sfc/{source}_{dt.strftime('%Y%m%d%H%M')}.json"
+        return f"data/sfc/{source}_{network}_{dt.strftime('%Y%m%d%H%M')}.json"
     return fname
 
 
@@ -71,19 +71,20 @@ def _parse_meso_mdf(mdf_txt):
 
 
 class ObsNetworkConfig(object):
-    def __init__(self, url_fmt, parser, cycle, data_check_intv, delay, stale):
+    def __init__(self, name, url_fmt, parser, cycle, data_check_intv, delay, stale):
+        self.name = name
         self.url_fmt = url_fmt
         self.parser = parser
         self._cycle = cycle
         self._delay = delay
         self._check_intv = data_check_intv
-        self._stale = stale
+        self.stale = stale
 
     def get_time(self, dcycle=0):
         now = (datetime.utcnow() - timedelta(seconds=self._delay)).timestamp()
         recent = floor(now / self._cycle) * self._cycle
         obs_dt = datetime.fromtimestamp(recent) - timedelta(seconds=(dcycle * self._cycle))
-        if (datetime.utcnow() - obs_dt).total_seconds() > self._stale:
+        if (datetime.utcnow() - obs_dt).total_seconds() > self.stale:
             raise StaleDataError('')
         return obs_dt
 
@@ -99,12 +100,14 @@ class ObsNetworkConfig(object):
 _configs = {
     'metar': [
         ObsNetworkConfig(
+            "metar",
             "http://www.mesonet.org/data/public/noaa/metar/archive/mdf/conus/%Y/%m/%d/%Y%m%d%H%M.mdf",
             _parse_metar_mdf, 3600, 300, 600, 7200
         )
     ],
     'mesonet': [
         ObsNetworkConfig(
+            "okmesonet",
             "http://www.mesonet.org/data/public/mesonet/mdf/%Y/%m/%d/%Y%m%d%H%M.mdf",
             _parse_meso_mdf, 300, 300, 420, 1200
         )
@@ -116,22 +119,23 @@ class ObsHandler(DataHandler):
     def __init__(self, source):
         self._source = source
         self._obs = None
-        self._cache = Cache(_cache_fname(self._source))
+        self._cache = {cfg.name: Cache(_cache_fname(self._source, cfg.name)) for cfg in _configs[source]}
 
         self.id = f"obs.{self._source}"
 
     async def fetch(self):
+        params = ['STID', 'LAT', 'LON', 'PALT', 'TAIR', 'TDEW', 'WDIR', 'WSPD']
         def pack_ob(param_order, ob):
-            pack_fmt = '5sff13sfffff'
+            pack_fmt = '5sfffffff'
             return struct.pack(pack_fmt, *[ob[p] for p in param_order])
 
         obs_dt = max(cfg.get_time() for cfg in _configs[self._source])
 
-        obs_json = self._cache.load_cache(obs_dt)
-        if obs_json is None:
-            obs = []
-            obs_dts = []
-            for config in _configs[self._source]:
+        entities = []
+        for config in _configs[self._source]:
+            obs_entity = self._cache[config.name].load_cache(obs_dt)
+
+            if obs_entity is None:
                 network_obs = None
                 network_error = False
                 dcycle = 0
@@ -151,22 +155,29 @@ class ObsHandler(DataHandler):
                         dcycle += 1
 
                 if not network_error:
-                    obs.extend(network_obs)
-                    obs_dts.append(cfg_dt)
+                    obs_str = b"".join(pack_ob(params, ob) for ob in network_obs)
+                    base64_data = base64.encodebytes(obs_str).decode('ascii')
 
-            if len(obs) == 0:
-                self._obs = None
-                raise StaleDataError(f"obs.{self._source}")
+                    obs_entity = {
+                        'network': config.name,
+                        'valid': obs_dt.strftime("%Y-%m-%d %H:%M:%S UTC"),
+                        'expires': (obs_dt + timedelta(seconds=config.stale)).strftime("%Y-%m-%d %H:%M:%S UTC"),
+                        'params': params,
+                        'data': "".join(base64_data.split("\n")),
+                    }
 
-            obs_dt = max(obs_dts)
+            entities.append(obs_entity)
 
-            params = ['STID', 'LAT', 'LON', 'TIME', 'PALT', 'TAIR', 'TDEW', 'WDIR', 'WSPD']
-            obs_str = b"".join(pack_ob(params, ob) for ob in obs)
 
-            base64_data = base64.encodebytes(zlib.compress(obs_str)).decode('ascii')
-            obs_json = {'source':'METAR', 'params':params, 'data':"".join(base64_data.split("\n"))}
-            obs_json['nominal_time'] = obs_dt.strftime("%Y%m%d_%H%M")
-            obs_json['handler'] = self.id
+        if len(entities) == 0:
+            self._obs = None
+            raise StaleDataError(f"obs.{self._source}")
+
+        obs_json = {
+            'source': self._source,
+            'handler': self.id,
+            'entities': entities,
+        }
 
         self._obs = obs_json
 
@@ -181,5 +192,6 @@ class ObsHandler(DataHandler):
         if self._obs is None:
             return
 
-        dt = datetime.strptime(self._obs['nominal_time'], '%Y%m%d_%H%M')
-        self._cache.cache(self._obs, dt)
+        for entity in self._obs['entities']:
+            dt = datetime.strptime(entity['valid'], '%Y-%m-%d %H:%M:%S UTC')
+            self._cache[entity['network']].cache(entity, dt)

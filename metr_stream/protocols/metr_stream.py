@@ -2,10 +2,11 @@
 import logging
 import json
 import multiprocessing
+import zlib
 
 from metr_stream.protocols.websocket import WebSocketProtocol
 from metr_stream.handlers.handler import get_data_handler
-from metr_stream.utils.errors import StaleDataError
+from metr_stream.utils.errors import StaleDataError, NoNewDataError
 from metr_stream.utils.timer import Timer
 
 
@@ -53,18 +54,6 @@ class MetrStreamProtocol(WebSocketProtocol):
         self._logger.info(f"Connection from {self._source} closed")
 
     async def fetch_data(self, handler, is_binary=False):
-        success = True
-        try:
-            req_data = await handler.fetch()
-        except StaleDataError as exc:
-            self._logger.error(f"Stale data in {exc.handler}")
-            req_data = {'handler': exc.handler, 'error':'stale data'}
-            success = False
-        except Exception as exc:
-            self._logger.error(f"Error in {handler.id}: {exc}")
-            req_data = {'handler': handler.id, 'error':'internal server error'}
-            success = False   
-
         async def do_fetch():
             await self.fetch_data(handler, is_binary=is_binary)
 
@@ -72,7 +61,25 @@ class MetrStreamProtocol(WebSocketProtocol):
         handler_timer.start()
         self._active_timers[handler.id] = handler_timer
 
+        success = True
+        try:
+            req_data = await handler.fetch()
+        except StaleDataError as exc:
+            self._logger.error(f"Stale data in {exc.handler}")
+            req_data = {'handler': exc.handler, 'error':'stale data'}
+            success = False
+        except NoNewDataError as exc:
+            self._logger.info(f"No new data for {exc.handler}")
+            return success
+        except Exception as exc:
+            self._logger.error(f"Error in {handler.id}: {exc}")
+            req_data = {'handler': handler.id, 'error':'internal server error'}
+            success = False   
+
         data_json = json.dumps(req_data)
+        if req_data['handler'].startswith('shapefile') or req_data['handler'].startswith('level2radar') or req_data['handler'].startswith('obs'):
+            data_json = zlib.compress(data_json.encode('utf-8'))
+            is_binary = True
         await self.send_message(data_json, is_binary=is_binary)
 
         proc = multiprocessing.Process(target=handler.post_fetch)

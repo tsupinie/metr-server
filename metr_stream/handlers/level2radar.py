@@ -26,6 +26,7 @@ from metr_stream.handlers.handler import DataHandler
 from metr_stream.utils.download import download
 from metr_stream.utils.static import get_static
 from metr_stream.utils.cache import Cache
+from metr_stream.utils.errors import NoNewDataError
 
 _url_base = "http://mesonet-nexrad.agron.iastate.edu/level2/raw"
 _wsr_88ds = None
@@ -88,6 +89,8 @@ class Level2Handler(DataHandler):
         self._cache = Cache(_cache_fname(Level2Handler._cache_dir, self._site, self._field, self._elev),
                             timeout=timedelta(minutes=15))
 
+        self._last_dt_sent = None
+
         int_deg = int(np.floor(self._elev))
         frc_deg = int((self._elev - int_deg) * 10)
         self.id = f"level2radar.{self._site}.{self._field}.{int_deg:02d}p{frc_deg:1d}"
@@ -128,6 +131,11 @@ class Level2Handler(DataHandler):
                         self._radar_vols.append(rv)
 
             idt += 1
+
+        if self._last_dt_sent is not None and sweep['entities'][0]['valid'] <= self._last_dt_sent:
+            raise NoNewDataError(self.id)
+
+        self._last_dt_sent = sweep['entities'][0]['valid']
 
         _logger.debug(f"Number of radar volumes: {len(self._radar_vols)}")
         sweep['handler'] = self.id
@@ -246,20 +254,19 @@ class RadarSweep(object):
                 site = st
                 break
 
-        proj = pyproj.Proj(proj='lcc', lon_0=-97.5, lat_1=30, lat_2=45)
-        site_x, site_y = proj(site['longitude'], site['latitude'])
-        first_x = site_x + self._st_rn * np.sin(np.radians(self._st_az))
-        first_y = site_y + self._st_rn * np.cos(np.radians(self._st_az))
+        rs_json = {'site': self.site, 'field': self.field.title(), 'elevation': "%f" % self.elevation}
 
-        rs_json = {'site': self.site, 'field': self.field.title(), 'elevation': "%f" % self.elevation, 
-                   'st_azimuth': self._st_az, 'st_range': self._st_rn, 'dazim':self._dazim, 'drng':self._drng}
-        rs_json['site_latitude'] = site['latitude']
-        rs_json['site_longitude'] = site['longitude']
-        rs_json['first_longitude'], rs_json['first_latitude'] = proj(first_x, first_y, inverse=True)
-        rs_json['timestamp'] = self.timestamp.strftime("%Y%m%d_%H%M")
-        rs_json['n_rays'], rs_json['n_gates'] = self._data.shape
-        base64_data = base64.encodebytes(zlib.compress(data_packed)).decode('ascii')
-        rs_json['data'] = "".join(base64_data.split("\n"))
+        radar_entity = {'st_azimuth': self._st_az, 'st_range': self._st_rn, 'dazim':self._dazim, 'drng':self._drng}
+        radar_entity['site_latitude'] = site['latitude']
+        radar_entity['site_longitude'] = site['longitude']
+
+        radar_entity['valid'] = self.timestamp.strftime("%Y-%m-%d %H:%M:%S UTC")
+        radar_entity['expires'] = (self.timestamp + timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S UTC")
+        radar_entity['n_rays'], radar_entity['n_gates'] = self._data.shape
+        base64_data = base64.encodebytes(data_packed).decode('ascii')
+        radar_entity['data'] = "".join(base64_data.split("\n"))
+
+        rs_json['entities'] = [radar_entity]
         return rs_json
         
     def cache(self):
