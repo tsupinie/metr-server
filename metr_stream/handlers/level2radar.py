@@ -201,6 +201,19 @@ class RadarVolume(object):
                 azimuths = rfile.get_azimuth(ie)
                 ranges = rfile.range['data']
 
+                nyquist = rfile.get_nyquist_vel(ie)
+                if field == 'velocity' and nyquist < 10:
+                    continue
+                elif field != 'velocity' and len(sweeps) > 0 and sweeps[-1].elevation == elv and sweeps[-1].field == field:
+                    # Check to see if this is a "duplicate" sweep
+                    if nyquist > 10:
+                        # Assume this is the short-range sweep and ignore it
+                        continue
+                    else:
+                        # Assume that somehow the short-range sweep got put in the file
+                        # first and take it out. I don't think this should ever happen.
+                        sweeps.pop()
+
                 saz = azimuths[0]
                 eaz = azimuths[-1] if azimuths[-1] > azimuths[0] else azimuths[-1] + 360
                 dazim = round((eaz - saz) / len(azimuths), 1)
