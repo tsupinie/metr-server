@@ -166,8 +166,8 @@ class ObsHandler(DataHandler):
                         'data': "".join(base64_data.split("\n")),
                     }
 
-            entities.append(obs_entity)
-
+            if obs_entity is not None:
+                entities.append(obs_entity)
 
         if len(entities) == 0:
             self._obs = None
