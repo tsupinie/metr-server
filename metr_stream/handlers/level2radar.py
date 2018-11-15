@@ -95,7 +95,7 @@ class Level2Handler(DataHandler):
         frc_deg = int((self._elev - int_deg) * 10)
         self.id = f"level2radar.{self._site}.{self._field}.{int_deg:02d}p{frc_deg:1d}"
 
-    async def fetch(self):
+    async def fetch(self, first_time=True):
         self._radar_vols = [ rv for rv in self._radar_vols if rv.timestamp > (datetime.utcnow() - timedelta(hours=2)) ]
 
         dts = await check_recent_site(self._site)
@@ -106,9 +106,10 @@ class Level2Handler(DataHandler):
 
         while sweep is None:
             fetch_dt = dts[idt]
-            sweep = self._load_cache(fetch_dt)
-            if sweep is not None:
-                break
+            if first_time:
+                sweep = self._load_cache(fetch_dt)
+                if sweep is not None:
+                    break
 
             try:
                 rv = await RadarVolume.fetch(self._site, fetch_dt)

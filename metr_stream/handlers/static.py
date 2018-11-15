@@ -8,7 +8,7 @@ class StaticHandler(DataHandler):
         self._static = static
         self.id = "gui"
 
-    async def fetch(self):
+    async def fetch(self, first_time=True):
         with open(f'static/{self._static}.json', 'rb') as fstat:
             static_data = json.loads(fstat.read().decode('utf-8'))
 

@@ -11,7 +11,7 @@ class ShapefileHandler(DataHandler):
 
         self.id = f"shapefile.{self._domain}.{self._name}"
 
-    async def fetch(self):
+    async def fetch(self, first_time=True):
         fname = f"data/{self._domain}/{self._name}.json.gz"
         shp_str = zlib.decompress(open(fname, 'rb').read()).decode('utf-8')
         shp_json = json.loads(shp_str)

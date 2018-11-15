@@ -123,7 +123,7 @@ class ObsHandler(DataHandler):
 
         self.id = f"obs.{self._source}"
 
-    async def fetch(self):
+    async def fetch(self, first_time=True):
         params = ['STID', 'LAT', 'LON', 'PALT', 'TAIR', 'TDEW', 'WDIR', 'WSPD']
         def pack_ob(param_order, ob):
             pack_fmt = '5sfffffff'

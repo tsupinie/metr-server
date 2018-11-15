@@ -31,7 +31,7 @@ class MetrStreamProtocol(WebSocketProtocol):
             req_type = msg_json.pop('type')
             req_handler = get_data_handler(req_type)(**msg_json)
 
-            success = await self.fetch_data(req_handler)
+            success = await self.fetch_data(req_handler, first_time=True)
             if success:
                 handler_id = req_handler.id
                 self._logger.debug(f"Activating {handler_id} for {self._source}")
@@ -53,9 +53,9 @@ class MetrStreamProtocol(WebSocketProtocol):
 
         self._logger.info(f"Connection from {self._source} closed")
 
-    async def fetch_data(self, handler, is_binary=False):
+    async def fetch_data(self, handler, first_time=True, is_binary=False):
         async def do_fetch():
-            await self.fetch_data(handler, is_binary=is_binary)
+            await self.fetch_data(handler, first_time=False, is_binary=is_binary)
 
         handler_timer = Timer(do_fetch, handler.data_check_intv(), single_shot=True)
         handler_timer.start()
@@ -63,7 +63,7 @@ class MetrStreamProtocol(WebSocketProtocol):
 
         success = True
         try:
-            req_data = await handler.fetch()
+            req_data = await handler.fetch(first_time=first_time)
         except StaleDataError as exc:
             self._logger.error(f"Stale data in {exc.handler}")
             req_data = {'handler': exc.handler, 'error':'stale data'}
